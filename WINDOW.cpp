@@ -20,7 +20,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 		WINDOW* window = (WINDOW*)((LPCREATESTRUCT)lparam)->lpCreateParams;
 		// .. and then stored for later lookup
 		SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)window);
+		window->setHWND(hwnd);
 		window->onCreate();
+		
 		break;
 		}
 	case WM_DESTROY:
@@ -58,7 +60,7 @@ bool WINDOW::init()
 		return false;
 
 	//Window Creation
-	m_hwnd=::CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, L"MyWindowClass", L"DirectX Application", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, 1024, 768,
+	m_hwnd=::CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, L"MyWindowClass", L"My Engine", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, 1024, 768,
 		NULL, NULL, NULL, this);
 
 	if (!m_hwnd)
@@ -78,15 +80,15 @@ bool WINDOW::broadcast()
 {
 	MSG msg;
 
+	this->onUpdate();
+
 	while (::PeekMessage(&msg, NULL,0,0,PM_REMOVE)>0)
 	{
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 	}
 
-	this->onUpdate();
-
-	Sleep(0);
+	Sleep(1);
 
 
 	return true;
@@ -95,7 +97,7 @@ bool WINDOW::broadcast()
 bool WINDOW::release()
 {
 	//Destroys the window
-		if(!::DestroyWindow(m_hwnd));
+		if(!::DestroyWindow(m_hwnd))
 			return false;
 
 	return true;
@@ -105,6 +107,28 @@ bool WINDOW::isRun()
 {
 	return m_is_run;
 }
+
+
+RECT WINDOW::getClientWindowRect()
+{
+	RECT rc;
+	::GetClientRect(this->m_hwnd, &rc);
+	return rc;
+}
+
+void WINDOW::setHWND(HWND hwnd)
+{
+	this->m_hwnd = hwnd;
+}
+
+void WINDOW::onCreate()
+{
+}
+
+void WINDOW::onUpdate()
+{
+}
+
 
 void WINDOW::onDestroy()
 {

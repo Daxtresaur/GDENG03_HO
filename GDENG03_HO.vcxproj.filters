@@ -13,6 +13,12 @@
     <Filter Include="GameEngine\Graphics Engine">
       <UniqueIdentifier>{9ad61f6c-992c-4b3f-9dea-9875ea1b9242}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\Graphics Engine\Swap Chain">
+      <UniqueIdentifier>{2e76b277-27a9-4ee6-9130-cfceef7c099b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Graphics Engine\DeviceContext">
+      <UniqueIdentifier>{25b47aa5-229f-447a-85a9-b4dea8271fb5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MAIN.cpp">
@@ -27,6 +33,12 @@
     <ClCompile Include="GRAPHICS_ENGINE.cpp">
       <Filter>GameEngine\Graphics Engine</Filter>
     </ClCompile>
+    <ClCompile Include="SWAPCHAIN.cpp">
+      <Filter>GameEngine\Graphics Engine\Swap Chain</Filter>
+    </ClCompile>
+    <ClCompile Include="DEVICECONTEXT.cpp">
+      <Filter>GameEngine\Graphics Engine\DeviceContext</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -37,6 +49,12 @@
     </ClInclude>
     <ClInclude Include="GRAPHICS_ENGINE.h">
       <Filter>GameEngine\Graphics Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="SWAPCHAIN.h">
+      <Filter>GameEngine\Graphics Engine\Swap Chain</Filter>
+    </ClInclude>
+    <ClInclude Include="DEVICECONTEXT.h">
+      <Filter>GameEngine\Graphics Engine\DeviceContext</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
