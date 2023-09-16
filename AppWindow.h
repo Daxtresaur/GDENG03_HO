@@ -3,6 +3,7 @@
 #include "GRAPHICS_ENGINE.h"
 #include "SWAPCHAIN.h"
 #include "DEVICECONTEXT.h"
+#include "VERTEXBUFFER.h"
 
 class AppWindow: public WINDOW
 {
@@ -17,5 +18,6 @@ public:
 
 private:
 	SWAPCHAIN* m_swap_chain;
+	VERTEXBUFFER* m_vb;
 };
 

@@ -5,6 +5,7 @@
 
 class SWAPCHAIN;
 class DEVICECONTEXT;
+class VERTEXBUFFER;
 
 
 class GRAPHICS_ENGINE
@@ -19,6 +20,11 @@ public:
 
 	SWAPCHAIN* createSwapChain();
 	DEVICECONTEXT* getImmediateDeviceContext();
+	VERTEXBUFFER* createVertexBuffer();
+
+	bool createShaders();
+	bool setShaders();
+	void getShaderBufferAndSize(void** bytecode, UINT* size);
 
 	static GRAPHICS_ENGINE* get();
 	
@@ -35,6 +41,13 @@ private:
 
 	DEVICECONTEXT* m_imm_device_context;
 
+	ID3DBlob* m_vsblob = nullptr;
+	ID3DBlob* m_psblob = nullptr;
+	ID3D11VertexShader* m_vs = nullptr;
+	ID3D11PixelShader* m_ps = nullptr;
+
 	friend class SWAPCHAIN;
+	friend class VERTEXBUFFER;
+
 };
 
