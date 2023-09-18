@@ -31,9 +31,12 @@ void AppWindow::onCreate()
 	vertex list[] =
 	{
 		//X - Y - Z
-		{-0.5f,-0.5f,0.0f}, // POS1
-		{0.0f,0.5f,0.0f}, // POS2
-		{ 0.5f,-0.5f,0.0f}
+		{0.f, 0.0f, 0.0f}, // POS1
+		{0.f, 1.f, 0.0f}, // POS2
+		{1.f, 1.f, 0.0f},
+		{1.f, 0.f, 0.f},
+		{0.f, 0.0f, 0.0f},
+		{0.f, 0.0f, 0.0f}
 	};
 
 	m_vb = GRAPHICS_ENGINE::get()->createVertexBuffer();
