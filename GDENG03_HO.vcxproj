@@ -138,6 +138,7 @@
     <ClCompile Include="GRAPHICS_ENGINE.cpp" />
     <ClCompile Include="MAIN.cpp" />
     <ClCompile Include="SWAPCHAIN.cpp" />
+    <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="VERTEXBUFFER.cpp" />
     <ClCompile Include="WINDOW.cpp" />
   </ItemGroup>
@@ -146,6 +147,7 @@
     <ClInclude Include="DEVICECONTEXT.h" />
     <ClInclude Include="GRAPHICS_ENGINE.h" />
     <ClInclude Include="SWAPCHAIN.h" />
+    <ClInclude Include="Triangle.h" />
     <ClInclude Include="VERTEXBUFFER.h" />
     <ClInclude Include="WINDOW.h" />
   </ItemGroup>
