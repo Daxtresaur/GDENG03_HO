@@ -11,7 +11,7 @@ public:
 	vertex* getVertexList(int* vertex_count) override;
 	void drawShape(UINT* vertex_index) override;
 
-	~Triangle() override;
+	~Triangle();
 	
 
 };

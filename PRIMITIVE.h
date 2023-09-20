@@ -23,7 +23,7 @@ public:
 	virtual void drawShape(UINT* vertex_index)=0;
 
 
-	virtual ~PRIMITIVE();
+	~PRIMITIVE();
 
 protected:
 	vertex* VertexList = nullptr;
