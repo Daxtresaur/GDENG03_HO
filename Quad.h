@@ -1,18 +1,14 @@
 #pragma once
 #include "PRIMITIVE.h"
-#include <vector>
 
-class Triangle : public PRIMITIVE
+class Quad : public PRIMITIVE
 {
 public:
-
-	Triangle(vertex origin,vertex pointA, vertex pointB);
+	Quad(vertex origin, vertex pointA, vertex pointB, vertex pointC);
 
 	vertex* getVertexList(int* vertex_count) override;
 	void drawShape(UINT* vertex_index) override;
 
-	~Triangle() override;
-	
-
+	~Quad();
 };
 

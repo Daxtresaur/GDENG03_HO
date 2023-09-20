@@ -137,6 +137,8 @@
     <ClCompile Include="DEVICECONTEXT.cpp" />
     <ClCompile Include="GRAPHICS_ENGINE.cpp" />
     <ClCompile Include="MAIN.cpp" />
+    <ClCompile Include="PRIMITIVE.cpp" />
+    <ClCompile Include="Quad.cpp" />
     <ClCompile Include="SWAPCHAIN.cpp" />
     <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="VERTEXBUFFER.cpp" />
@@ -146,6 +148,8 @@
     <ClInclude Include="AppWindow.h" />
     <ClInclude Include="DEVICECONTEXT.h" />
     <ClInclude Include="GRAPHICS_ENGINE.h" />
+    <ClInclude Include="PRIMITIVE.h" />
+    <ClInclude Include="Quad.h" />
     <ClInclude Include="SWAPCHAIN.h" />
     <ClInclude Include="Triangle.h" />
     <ClInclude Include="VERTEXBUFFER.h" />

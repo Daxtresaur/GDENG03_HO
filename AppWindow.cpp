@@ -1,5 +1,5 @@
 #include "AppWindow.h"
-
+/*
 struct vec3
 {
 	float x, y, z;
@@ -9,7 +9,7 @@ struct vertex
 {
 	vec3 position;
 };
-
+*/
 AppWindow::AppWindow()
 {
 }
@@ -28,6 +28,7 @@ void AppWindow::onCreate()
 	RECT rc = this->getClientWindowRect();
 	m_swap_chain->init(this->m_hwnd, rc.right - rc.left, rc.bottom - rc.top);
 
+	/*
 	vertex list[] =
 	{
 		//X - Y - Z
@@ -38,9 +39,34 @@ void AppWindow::onCreate()
 		{0.f, 0.0f, 0.0f},
 		{0.f, 0.0f, 0.0f}
 	};
+	*/
+
+	Quad* quadA = new Quad(
+		vertex{ -0.75f, 0.75f, 0.f },
+		vertex{-0.25f, 0.75f, 0.f},
+		vertex{-0.75f, 0.25f, 0.f},
+		vertex{-0.25f, 0.25f, 0.f}
+	);
+	PrimitiveList.push_back(quadA);
+
+	Quad* quadB = new Quad(
+		vertex{ 0.25f, 0.75f, 0.f },
+		vertex{ 0.75f, 0.75f, 0.f },
+		vertex{ 0.25f, 0.25f, 0.f },
+		vertex{ 0.75f, 0.25f, 0.f }
+	);
+	PrimitiveList.push_back(quadB);
+
+	Quad* quadC = new Quad(
+		vertex{ -0.75f, -0.25f, 0.f },
+		vertex{ -0.25f, -0.25f, 0.f },
+		vertex{ -0.75f, -0.75f, 0.f },
+		vertex{ -0.25f, -0.75f, 0.f }
+	);
+	PrimitiveList.push_back(quadC);
 
 	m_vb = GRAPHICS_ENGINE::get()->createVertexBuffer();
-	UINT size_list = ARRAYSIZE(list);
+	//UINT size_list = ARRAYSIZE(Triangle1.getVertexList());
 
 	GRAPHICS_ENGINE::get()->createShaders();
 
@@ -48,9 +74,25 @@ void AppWindow::onCreate()
 	UINT size_shader = 0;
 	GRAPHICS_ENGINE::get()->getShaderBufferAndSize(&shader_byte_code, &size_shader);
 
-	m_vb->load(list, sizeof(vertex), size_list, shader_byte_code, size_shader);
+	std::vector<vertex> vertexVector;
+	vertex* currentSet = nullptr;
+	int currentCount = 0;
+	int totalCount = 0;
 
+	for (int i = 0; i < PrimitiveList.size(); i++) {
+		currentSet = PrimitiveList[i]->getVertexList(&currentCount);
+		for (int j = 0; j < currentCount; j++) {
+			vertexVector.push_back(currentSet[j]);
+		}
+		totalCount += currentCount;
+	}
 
+	vertex* completeVertexList = new vertex[totalCount];
+	std::copy(vertexVector.begin(), vertexVector.end(), completeVertexList);
+
+	m_vb->load(completeVertexList, sizeof(vertex), 3, shader_byte_code, size_shader);
+
+	delete[] completeVertexList;
 
 }
 
@@ -70,7 +112,12 @@ void AppWindow::onUpdate()
 	GRAPHICS_ENGINE::get()->getImmediateDeviceContext()->setVertexBuffer(m_vb);
 
 	// FINALLY DRAW THE TRIANGLE
-	GRAPHICS_ENGINE::get()->getImmediateDeviceContext()->drawTriangleList(m_vb->getSizeVertexList(), 0);
+	//GRAPHICS_ENGINE::get()->getImmediateDeviceContext()->drawTriangleList(m_vb->getSizeVertexList(), 0);
+
+	UINT vertexIndex = 0;
+	for (int i = 0; i < PrimitiveList.size(); i++) {
+		PrimitiveList[i]->drawShape(&vertexIndex);
+	}
 
 
 	m_swap_chain->present(true);
@@ -81,5 +128,10 @@ void AppWindow::onDestroy()
 	WINDOW::onDestroy();
 	m_vb->release();
 	m_swap_chain->release();
+
+	for (int i = 0; i < PrimitiveList.size(); i++) {
+		delete PrimitiveList[i];
+	}
+
 	GRAPHICS_ENGINE::get()->release();
 }

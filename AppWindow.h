@@ -4,6 +4,10 @@
 #include "SWAPCHAIN.h"
 #include "DEVICECONTEXT.h"
 #include "VERTEXBUFFER.h"
+#include "PRIMITIVE.h"
+#include "Triangle.h"
+#include "Quad.h"
+#include <vector>
 
 class AppWindow: public WINDOW
 {
@@ -19,5 +23,9 @@ public:
 private:
 	SWAPCHAIN* m_swap_chain;
 	VERTEXBUFFER* m_vb;
+
+	std::vector<PRIMITIVE*> PrimitiveList;
+
+	
 };
 
