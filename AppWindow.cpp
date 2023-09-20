@@ -90,7 +90,7 @@ void AppWindow::onCreate()
 	vertex* completeVertexList = new vertex[totalCount];
 	std::copy(vertexVector.begin(), vertexVector.end(), completeVertexList);
 
-	m_vb->load(completeVertexList, sizeof(vertex), 3, shader_byte_code, size_shader);
+	m_vb->load(completeVertexList, sizeof(vertex), totalCount, shader_byte_code, size_shader);
 
 	delete[] completeVertexList;
 
