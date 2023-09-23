@@ -5,17 +5,17 @@
 
 Triangle::Triangle(vertex origin, vertex pointA, vertex pointB): PRIMITIVE(origin)
 {
-	this->VertexList = new vertex[3];
+	this->VerX_List = new vertex[3];
 
-	this->VertexList[0] = origin;
-	this->VertexList[1] = pointA;
-	this->VertexList[2] = pointB;
+	this->VerX_List[0] = origin;
+	this->VerX_List[1] = pointA;
+	this->VerX_List[2] = pointB;
 }
 
-vertex* Triangle::getVertexList(int* vertex_count)
+vertex* Triangle::acq_VerX_List(int* vertex_count)
 {
 	*vertex_count = 3;
-	return this->VertexList;
+	return this->VerX_List;
 }
 
 void Triangle::drawShape(UINT* vertex_index)

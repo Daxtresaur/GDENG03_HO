@@ -1,11 +1,12 @@
 #pragma once
 #include <d3d11.h>
-#include "SWAPCHAIN.h"
 
 
 class SWAPCHAIN;
 class DEVICECONTEXT;
 class VERTEXBUFFER;
+class VERTEXSHADER;
+class PIXELSHADER;
 
 
 class GRAPHICS_ENGINE
@@ -18,13 +19,26 @@ public:
 	bool release();
 	~GRAPHICS_ENGINE();
 
+	// Device Creation
 	SWAPCHAIN* createSwapChain();
 	DEVICECONTEXT* getImmediateDeviceContext();
 	VERTEXBUFFER* createVertexBuffer();
+	VERTEXSHADER* createVertexShader(const void* shader_byte_code, size_t byte_code_size);
+	PIXELSHADER* createPixelShader(const void* shader_byte_code, size_t byte_code_size);
 
-	bool createShaders();
-	bool setShaders();
-	void getShaderBufferAndSize(void** bytecode, UINT* size);
+	//Shader Functions
+	bool compileVertexShader(const wchar_t* file_name, const char* entry_point_name, void** shader_byte_code, size_t* byte_code_size);
+
+	bool compilePixelShader(const wchar_t* file_name, const char* entry_point_name, void** shader_byte_code, size_t* byte_code_size);
+
+
+	void releaseCompiledShader();
+
+
+
+	//DEFAULT SIMPLE SHADERS
+	//bool createShaders();
+	//bool setShaders();
 
 	static GRAPHICS_ENGINE* get();
 	
@@ -41,6 +55,7 @@ private:
 
 	DEVICECONTEXT* m_imm_device_context;
 
+	ID3DBlob* m_blob = nullptr;
 	ID3DBlob* m_vsblob = nullptr;
 	ID3DBlob* m_psblob = nullptr;
 	ID3D11VertexShader* m_vs = nullptr;
@@ -48,6 +63,8 @@ private:
 
 	friend class SWAPCHAIN;
 	friend class VERTEXBUFFER;
+	friend class VERTEXSHADER;
+	friend class PIXELSHADER;
 
 };
 

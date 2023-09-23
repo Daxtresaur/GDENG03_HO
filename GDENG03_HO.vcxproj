@@ -137,23 +137,43 @@
     <ClCompile Include="DEVICECONTEXT.cpp" />
     <ClCompile Include="GRAPHICS_ENGINE.cpp" />
     <ClCompile Include="MAIN.cpp" />
+    <ClCompile Include="PIXELSHADER.cpp" />
     <ClCompile Include="PRIMITIVE.cpp" />
     <ClCompile Include="Quad.cpp" />
     <ClCompile Include="SWAPCHAIN.cpp" />
     <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="VERTEXBUFFER.cpp" />
+    <ClCompile Include="VERTEXSHADER.cpp" />
     <ClCompile Include="WINDOW.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h" />
     <ClInclude Include="DEVICECONTEXT.h" />
     <ClInclude Include="GRAPHICS_ENGINE.h" />
+    <ClInclude Include="PIXELSHADER.h" />
     <ClInclude Include="PRIMITIVE.h" />
     <ClInclude Include="Quad.h" />
     <ClInclude Include="SWAPCHAIN.h" />
     <ClInclude Include="Triangle.h" />
     <ClInclude Include="VERTEXBUFFER.h" />
+    <ClInclude Include="VERTEXSHADER.h" />
     <ClInclude Include="WINDOW.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="PixelShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="VertexShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -8,7 +8,7 @@ public:
 
 	Triangle(vertex origin,vertex pointA, vertex pointB);
 
-	vertex* getVertexList(int* vertex_count) override;
+	vertex* acq_VerX_List(int* vertex_count) override;
 	void drawShape(UINT* vertex_index) override;
 
 	~Triangle();

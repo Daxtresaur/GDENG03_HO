@@ -1,15 +1,5 @@
 #include "AppWindow.h"
-/*
-struct vec3
-{
-	float x, y, z;
-};
 
-struct vertex
-{
-	vec3 position;
-};
-*/
 AppWindow::AppWindow()
 {
 }
@@ -42,57 +32,49 @@ void AppWindow::onCreate()
 	*/
 
 	Quad* quadA = new Quad(
-		vertex{ -0.75f, 0.75f, 0.f },
-		vertex{-0.25f, 0.75f, 0.f},
-		vertex{-0.75f, 0.25f, 0.f},
-		vertex{-0.25f, 0.25f, 0.f}
+		vertex{ -0.5f, -0.5f, 0.f ,     1,0,0 },
+		vertex{-0.5f, 0.5f, 0.f ,      0,1,0 },
+		vertex{0.5f, 0.5f, 0.f ,    1,0,1 },
+		vertex{0.5f, -0.5f, 0.f ,  0,0,1 }
 	);
-	PrimitiveList.push_back(quadA);
 
-	Quad* quadB = new Quad(
-		vertex{ 0.25f, 0.75f, 0.f },
-		vertex{ 0.75f, 0.75f, 0.f },
-		vertex{ 0.25f, 0.25f, 0.f },
-		vertex{ 0.75f, 0.25f, 0.f }
-	);
-	PrimitiveList.push_back(quadB);
-
-	Quad* quadC = new Quad(
-		vertex{ -0.75f, -0.25f, 0.f },
-		vertex{ -0.25f, -0.25f, 0.f },
-		vertex{ -0.75f, -0.75f, 0.f },
-		vertex{ -0.25f, -0.75f, 0.f }
-	);
-	PrimitiveList.push_back(quadC);
+	primitive_List.push_back(quadA);
 
 	m_vb = GRAPHICS_ENGINE::get()->createVertexBuffer();
-	//UINT size_list = ARRAYSIZE(Triangle1.getVertexList());
+	//UINT size_list = ARRAYSIZE(Triangle1.acq_VerX_List());
 
-	GRAPHICS_ENGINE::get()->createShaders();
+	//GRAPHICS_ENGINE::get()->createShaders();
 
 	void* shader_byte_code = nullptr;
-	UINT size_shader = 0;
-	GRAPHICS_ENGINE::get()->getShaderBufferAndSize(&shader_byte_code, &size_shader);
+	size_t size_shader = 0;
+	GRAPHICS_ENGINE::get()->compileVertexShader(L"VertexShader.hlsl", "main", &shader_byte_code, &size_shader);
 
 	std::vector<vertex> vertexVector;
 	vertex* currentSet = nullptr;
 	int currentCount = 0;
 	int totalCount = 0;
 
-	for (int i = 0; i < PrimitiveList.size(); i++) {
-		currentSet = PrimitiveList[i]->getVertexList(&currentCount);
+	for (int i = 0; i < primitive_List.size(); i++) {
+		currentSet = primitive_List[i]->acq_VerX_List(&currentCount);
 		for (int j = 0; j < currentCount; j++) {
 			vertexVector.push_back(currentSet[j]);
 		}
 		totalCount += currentCount;
 	}
 
-	vertex* completeVertexList = new vertex[totalCount];
-	std::copy(vertexVector.begin(), vertexVector.end(), completeVertexList);
+	vertex* complete_vertex_list = new vertex[totalCount];
+	std::copy(vertexVector.begin(), vertexVector.end(), complete_vertex_list);
 
-	m_vb->load(completeVertexList, sizeof(vertex), totalCount, shader_byte_code, size_shader);
+	m_vs = GRAPHICS_ENGINE::get()->createVertexShader(shader_byte_code, size_shader);
+	m_vb->load(complete_vertex_list, sizeof(vertex), totalCount, shader_byte_code, size_shader);
 
-	delete[] completeVertexList;
+	GRAPHICS_ENGINE::get()->releaseCompiledShader();
+
+	GRAPHICS_ENGINE::get()->compilePixelShader(L"PixelShader.hlsl", "main", &shader_byte_code, &size_shader);
+	m_ps = GRAPHICS_ENGINE::get()->createPixelShader(shader_byte_code, size_shader);
+	GRAPHICS_ENGINE::get()->releaseCompiledShader();
+
+	delete[] complete_vertex_list;
 
 }
 
@@ -107,7 +89,9 @@ void AppWindow::onUpdate()
 	RECT rc = this->getClientWindowRect();
 	GRAPHICS_ENGINE::get()->getImmediateDeviceContext()->setViewportSize(rc.right - rc.left, rc.bottom - rc.top);
 	//SET DEFAULT SHADER IN THE GRAPHICS PIPELINE TO BE ABLE TO DRAW
-	GRAPHICS_ENGINE::get()->setShaders();
+	//GRAPHICS_ENGINE::get()->setShaders();
+	GRAPHICS_ENGINE::get()->getImmediateDeviceContext()->setVertexShader(m_vs);
+
 	//SET THE VERTICES OF THE TRIANGLE TO DRAW
 	GRAPHICS_ENGINE::get()->getImmediateDeviceContext()->setVertexBuffer(m_vb);
 
@@ -115,8 +99,8 @@ void AppWindow::onUpdate()
 	//GRAPHICS_ENGINE::get()->getImmediateDeviceContext()->drawTriangleList(m_vb->getSizeVertexList(), 0);
 
 	UINT vertexIndex = 0;
-	for (int i = 0; i < PrimitiveList.size(); i++) {
-		PrimitiveList[i]->drawShape(&vertexIndex);
+	for (int i = 0; i < primitive_List.size(); i++) {
+		primitive_List[i]->drawShape(&vertexIndex);
 	}
 
 
@@ -129,8 +113,8 @@ void AppWindow::onDestroy()
 	m_vb->release();
 	m_swap_chain->release();
 
-	for (int i = 0; i < PrimitiveList.size(); i++) {
-		delete PrimitiveList[i];
+	for (int i = 0; i < primitive_List.size(); i++) {
+		delete primitive_List[i];
 	}
 
 	GRAPHICS_ENGINE::get()->release();

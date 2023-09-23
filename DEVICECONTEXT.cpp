@@ -1,6 +1,8 @@
 #include "DEVICECONTEXT.h"
 #include "SWAPCHAIN.h"
 #include "VERTEXBUFFER.h"
+#include "VERTEXSHADER.h"
+#include "PIXELSHADER.h"
 
 DEVICECONTEXT::DEVICECONTEXT(ID3D11DeviceContext* device_context) :m_device_context(device_context)
 {
@@ -46,6 +48,16 @@ void DEVICECONTEXT::setViewportSize(UINT width, UINT height)
 	m_device_context->RSSetViewports(1, &vp);
 }
 
+
+void DEVICECONTEXT::setVertexShader(VERTEXSHADER* vertex_shader)
+{
+	m_device_context->VSSetShader(vertex_shader->m_vs, nullptr, 0);
+}
+
+void DEVICECONTEXT::setPixelShader(PIXELSHADER* pixel_shader)
+{
+	m_device_context->PSSetShader(pixel_shader->m_ps, nullptr, 0);
+}
 
 bool DEVICECONTEXT::release()
 {

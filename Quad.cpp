@@ -5,18 +5,18 @@
 
 Quad::Quad(vertex origin, vertex pointA, vertex pointB, vertex pointC) : PRIMITIVE(origin)
 {
-	this->VertexList = new vertex[4];
+	this->VerX_List = new vertex[4];
 
-	this->VertexList[0] = origin;
-	this->VertexList[1] = pointA;
-	this->VertexList[2] = pointB;
-	this->VertexList[3] = pointC;
+	this->VerX_List[0] = origin;
+	this->VerX_List[1] = pointA;
+	this->VerX_List[2] = pointB;
+	this->VerX_List[3] = pointC;
 }
 
-vertex* Quad::getVertexList(int* vertex_count)
+vertex* Quad::acq_VerX_List(int* vertex_count)
 {
 	*vertex_count = 4;
-	return this->VertexList;
+	return this->VerX_List;
 }
 
 void Quad::drawShape(UINT* vertex_index)

@@ -6,5 +6,5 @@ PRIMITIVE::PRIMITIVE(vertex origin)
 
 PRIMITIVE::~PRIMITIVE()
 {
-	delete[] VertexList;
+	delete[] VerX_List;
 }
