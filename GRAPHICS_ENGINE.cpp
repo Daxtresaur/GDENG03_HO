@@ -151,21 +151,7 @@ void GRAPHICS_ENGINE::releaseCompiledShader()
 {
 	if (m_blob)m_blob->Release();
 }
-/*
-bool GRAPHICS_ENGINE::createShaders()
-{
-	ID3DBlob* errblob = nullptr;
-	D3DCompileFromFile(L"shader.fx", nullptr, nullptr, "main", "ps_5_0", NULL, NULL, &m_psblob, &errblob);
-	m_d3d_device->CreatePixelShader(m_psblob->GetBufferPointer(), m_psblob->GetBufferSize(), nullptr, &m_ps);
-	return true;
-}
 
-bool GRAPHICS_ENGINE::setShaders()
-{
-	m_imm_context->PSSetShader(m_ps, nullptr, 0);
-	return true;
-}
-*/
 GRAPHICS_ENGINE* GRAPHICS_ENGINE::get()
 {
 	static GRAPHICS_ENGINE engine;

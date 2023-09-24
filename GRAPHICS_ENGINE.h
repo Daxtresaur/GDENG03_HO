@@ -35,11 +35,6 @@ public:
 	void releaseCompiledShader();
 
 
-
-	//DEFAULT SIMPLE SHADERS
-	//bool createShaders();
-	//bool setShaders();
-
 	static GRAPHICS_ENGINE* get();
 	
 

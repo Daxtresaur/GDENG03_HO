@@ -33,7 +33,7 @@ void AppWindow::onCreate()
 
 	Quad* quadA = new Quad(
 		vertex{ -0.5f, -0.5f, 0.f ,     1,0,0 },
-		vertex{-0.5f, 0.5f, 0.f ,      0,1,0 },
+		vertex{-0.5f, 0.5f, 0.f ,      1,0,0 },
 		vertex{0.5f, 0.5f, 0.f ,    1,0,1 },
 		vertex{0.5f, -0.5f, 0.f ,  0,0,1 }
 	);
@@ -70,7 +70,7 @@ void AppWindow::onCreate()
 
 	GRAPHICS_ENGINE::get()->releaseCompiledShader();
 
-	GRAPHICS_ENGINE::get()->compilePixelShader(L"PixelShader.hlsl", "main", &shader_byte_code, &size_shader);
+	GRAPHICS_ENGINE::get()->compilePixelShader(L"PixelShader.hlsl", "psmain", &shader_byte_code, &size_shader);
 	m_ps = GRAPHICS_ENGINE::get()->createPixelShader(shader_byte_code, size_shader);
 	GRAPHICS_ENGINE::get()->releaseCompiledShader();
 
@@ -91,6 +91,7 @@ void AppWindow::onUpdate()
 	//SET DEFAULT SHADER IN THE GRAPHICS PIPELINE TO BE ABLE TO DRAW
 	//GRAPHICS_ENGINE::get()->setShaders();
 	GRAPHICS_ENGINE::get()->getImmediateDeviceContext()->setVertexShader(m_vs);
+	GRAPHICS_ENGINE::get()->getImmediateDeviceContext()->setPixelShader(m_ps);
 
 	//SET THE VERTICES OF THE TRIANGLE TO DRAW
 	GRAPHICS_ENGINE::get()->getImmediateDeviceContext()->setVertexBuffer(m_vb);
@@ -112,6 +113,8 @@ void AppWindow::onDestroy()
 	WINDOW::onDestroy();
 	m_vb->release();
 	m_swap_chain->release();
+	m_vs->release();
+	m_ps->release();
 
 	for (int i = 0; i < primitive_List.size(); i++) {
 		delete primitive_List[i];
