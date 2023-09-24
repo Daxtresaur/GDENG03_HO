@@ -1,6 +1,9 @@
 #include "DEVICECONTEXT.h"
 #include "SWAPCHAIN.h"
+
 #include "VERTEXBUFFER.h"
+#include "CONSTANTBUFFER.h"
+
 #include "VERTEXSHADER.h"
 #include "PIXELSHADER.h"
 
@@ -57,6 +60,16 @@ void DEVICECONTEXT::setVertexShader(VERTEXSHADER* vertex_shader)
 void DEVICECONTEXT::setPixelShader(PIXELSHADER* pixel_shader)
 {
 	m_device_context->PSSetShader(pixel_shader->m_ps, nullptr, 0);
+}
+
+void DEVICECONTEXT::setConstantBuffer(VERTEXSHADER* vertex_shader, CONSTANTBUFFER* buffer)
+{
+	m_device_context->VSSetConstantBuffers(0, 1, &buffer->m_buffer);
+}
+
+void DEVICECONTEXT::setConstantBuffer(PIXELSHADER* pixel_shader, CONSTANTBUFFER* buffer)
+{
+	m_device_context->PSSetConstantBuffers(0, 1, &buffer->m_buffer);
 }
 
 bool DEVICECONTEXT::release()

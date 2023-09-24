@@ -1,7 +1,11 @@
 #include "GRAPHICS_ENGINE.h"
+
 #include "DEVICECONTEXT.h"
 #include "SWAPCHAIN.h"
+
 #include "VERTEXBUFFER.h"
+#include "CONSTANTBUFFER.h"
+
 #include "VERTEXSHADER.h"
 #include "PIXELSHADER.h"
 
@@ -89,6 +93,11 @@ DEVICECONTEXT* GRAPHICS_ENGINE::getImmediateDeviceContext()
 VERTEXBUFFER* GRAPHICS_ENGINE::createVertexBuffer()
 {
 	return new VERTEXBUFFER();
+}
+
+CONSTANTBUFFER* GRAPHICS_ENGINE::createConstantBuffer()
+{
+	return new CONSTANTBUFFER();
 }
 
 VERTEXSHADER* GRAPHICS_ENGINE::createVertexShader(const void* shader_byte_code, size_t byte_code_size)

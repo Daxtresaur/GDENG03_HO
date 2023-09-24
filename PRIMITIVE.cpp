@@ -1,6 +1,6 @@
 #include "PRIMITIVE.h"
 
-PRIMITIVE::PRIMITIVE(vertex origin)
+PRIMITIVE::PRIMITIVE(changingvertex origin)
 {
 }
 

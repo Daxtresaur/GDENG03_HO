@@ -19,9 +19,6 @@
     <Filter Include="GameEngine\Graphics Engine\DeviceContext">
       <UniqueIdentifier>{25b47aa5-229f-447a-85a9-b4dea8271fb5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameEngine\Graphics Engine\VertexBuffer">
-      <UniqueIdentifier>{8af346e5-bfe7-4034-a463-f015000678a3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameEngine\Graphics Engine\Primitives">
       <UniqueIdentifier>{16cf9cca-c6da-4469-86eb-2680cde10877}</UniqueIdentifier>
     </Filter>
@@ -33,6 +30,15 @@
     </Filter>
     <Filter Include="GameEngine\Shaders\VertexShader">
       <UniqueIdentifier>{4dfa84b7-1126-4441-91d5-e06a6c84d9ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Graphics Engine\Buffers">
+      <UniqueIdentifier>{a3107ce2-2653-4d3b-9c23-9ba18e4dae15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Graphics Engine\Buffers\VertexBuffer">
+      <UniqueIdentifier>{8af346e5-bfe7-4034-a463-f015000678a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Graphics Engine\Buffers\ConstantBuffer">
+      <UniqueIdentifier>{566383bc-9d15-409e-8348-02933aa2d403}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -55,7 +61,7 @@
       <Filter>GameEngine\Graphics Engine\DeviceContext</Filter>
     </ClCompile>
     <ClCompile Include="VERTEXBUFFER.cpp">
-      <Filter>GameEngine\Graphics Engine\VertexBuffer</Filter>
+      <Filter>GameEngine\Graphics Engine\Buffers\VertexBuffer</Filter>
     </ClCompile>
     <ClCompile Include="Triangle.cpp">
       <Filter>GameEngine\Graphics Engine\Primitives</Filter>
@@ -72,6 +78,7 @@
     <ClCompile Include="VERTEXSHADER.cpp">
       <Filter>GameEngine\Shaders\VertexShader</Filter>
     </ClCompile>
+    <ClCompile Include="CONSTANTBUFFER.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -90,7 +97,7 @@
       <Filter>GameEngine\Graphics Engine\DeviceContext</Filter>
     </ClInclude>
     <ClInclude Include="VERTEXBUFFER.h">
-      <Filter>GameEngine\Graphics Engine\VertexBuffer</Filter>
+      <Filter>GameEngine\Graphics Engine\Buffers\VertexBuffer</Filter>
     </ClInclude>
     <ClInclude Include="Triangle.h">
       <Filter>GameEngine\Graphics Engine\Primitives</Filter>
@@ -107,6 +114,7 @@
     <ClInclude Include="VERTEXSHADER.h">
       <Filter>GameEngine\Shaders\VertexShader</Filter>
     </ClInclude>
+    <ClInclude Include="CONSTANTBUFFER.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="VertexShader.hlsl">

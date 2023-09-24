@@ -1,4 +1,5 @@
 #include "AppWindow.h"
+#include <Windows.h>
 
 AppWindow::AppWindow()
 {
@@ -32,10 +33,10 @@ void AppWindow::onCreate()
 	*/
 
 	Quad* quadA = new Quad(
-		vertex{ -0.5f, -0.5f, 0.f ,     1,0,0 },
-		vertex{-0.5f, 0.5f, 0.f ,      1,0,0 },
-		vertex{0.5f, 0.5f, 0.f ,    1,0,1 },
-		vertex{0.5f, -0.5f, 0.f ,  0,0,1 }
+		changingvertex{ -0.5f,-0.5f,0.0f,    -0.32f,-0.11f,0.0f,   0,0,0,  0,1,0 },
+		changingvertex{ -0.5f,0.5f,0.0f,     -0.11f,0.78f,0.0f,    1,1,0,  0,1,1 },
+		changingvertex{ 0.5f,-0.5f,0.0f,     0.75f,-0.73f,0.0f,   0,0,1,  1,0,0 },
+		changingvertex{ 0.5f,0.5f,0.0f,      0.88f,0.77f,0.0f,    1,1,1,  0,0,1 }
 	);
 
 	primitive_List.push_back(quadA);
@@ -43,11 +44,9 @@ void AppWindow::onCreate()
 	m_vb = GRAPHICS_ENGINE::get()->createVertexBuffer();
 	//UINT size_list = ARRAYSIZE(Triangle1.acq_VerX_List());
 
-	//GRAPHICS_ENGINE::get()->createShaders();
-
 	void* shader_byte_code = nullptr;
 	size_t size_shader = 0;
-	GRAPHICS_ENGINE::get()->compileVertexShader(L"VertexShader.hlsl", "main", &shader_byte_code, &size_shader);
+	GRAPHICS_ENGINE::get()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shader_byte_code, &size_shader);
 
 	std::vector<vertex> vertexVector;
 	vertex* currentSet = nullptr;
@@ -76,6 +75,12 @@ void AppWindow::onCreate()
 
 	delete[] complete_vertex_list;
 
+	constant cc;
+	cc.m_angle = 0;
+
+	m_cb = GRAPHICS_ENGINE::get()->createConstantBuffer();
+	m_cb->load(&cc, sizeof(constant));
+
 }
 
 void AppWindow::onUpdate()
@@ -88,8 +93,24 @@ void AppWindow::onUpdate()
 	//SET VIEWPORT OF RENDER TARGET IN WHICH WE HAVE TO DRAW
 	RECT rc = this->getClientWindowRect();
 	GRAPHICS_ENGINE::get()->getImmediateDeviceContext()->setViewportSize(rc.right - rc.left, rc.bottom - rc.top);
+
+	unsigned long new_time = 0;
+	if (m_old_time)
+		new_time = ::GetTickCount() - m_old_time;
+	m_delta_time = new_time / 1000.0f;
+	m_old_time = ::GetTickCount();
+
+	m_angle += 1.57f * m_delta_time;
+	constant cc;
+	cc.m_angle = m_angle;
+
+	m_cb->update(GRAPHICS_ENGINE::get()->getImmediateDeviceContext(), &cc);
+
+	GRAPHICS_ENGINE::get()->getImmediateDeviceContext()->setConstantBuffer(m_vs, m_cb);
+	GRAPHICS_ENGINE::get()->getImmediateDeviceContext()->setConstantBuffer(m_ps, m_cb);
+
+
 	//SET DEFAULT SHADER IN THE GRAPHICS PIPELINE TO BE ABLE TO DRAW
-	//GRAPHICS_ENGINE::get()->setShaders();
 	GRAPHICS_ENGINE::get()->getImmediateDeviceContext()->setVertexShader(m_vs);
 	GRAPHICS_ENGINE::get()->getImmediateDeviceContext()->setPixelShader(m_ps);
 
@@ -97,7 +118,7 @@ void AppWindow::onUpdate()
 	GRAPHICS_ENGINE::get()->getImmediateDeviceContext()->setVertexBuffer(m_vb);
 
 	// FINALLY DRAW THE TRIANGLE
-	//GRAPHICS_ENGINE::get()->getImmediateDeviceContext()->drawTriangleList(m_vb->getSizeVertexList(), 0);
+	GRAPHICS_ENGINE::get()->getImmediateDeviceContext()->drawTriangleList(m_vb->getSizeVertexList(), 0);
 
 	UINT vertexIndex = 0;
 	for (int i = 0; i < primitive_List.size(); i++) {

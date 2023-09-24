@@ -3,16 +3,16 @@
 #include "DEVICECONTEXT.h"
 #include <vector>
 
-Triangle::Triangle(vertex origin, vertex pointA, vertex pointB): PRIMITIVE(origin)
+Triangle::Triangle(changingvertex origin, changingvertex pointA, changingvertex pointB): PRIMITIVE(origin)
 {
-	this->VerX_List = new vertex[3];
+	this->VerX_List = new changingvertex[3];
 
 	this->VerX_List[0] = origin;
 	this->VerX_List[1] = pointA;
 	this->VerX_List[2] = pointB;
 }
 
-vertex* Triangle::acq_VerX_List(int* vertex_count)
+changingvertex* Triangle::acq_VerX_List(int* vertex_count)
 {
 	*vertex_count = 3;
 	return this->VerX_List;

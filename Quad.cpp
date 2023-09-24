@@ -3,9 +3,9 @@
 #include "DEVICECONTEXT.h"
 #include <vector>
 
-Quad::Quad(vertex origin, vertex pointA, vertex pointB, vertex pointC) : PRIMITIVE(origin)
+Quad::Quad(changingvertex origin, changingvertex pointA, changingvertex pointB, changingvertex pointC) : PRIMITIVE(origin)
 {
-	this->VerX_List = new vertex[4];
+	this->VerX_List = new changingvertex[4];
 
 	this->VerX_List[0] = origin;
 	this->VerX_List[1] = pointA;
@@ -13,7 +13,7 @@ Quad::Quad(vertex origin, vertex pointA, vertex pointB, vertex pointC) : PRIMITI
 	this->VerX_List[3] = pointC;
 }
 
-vertex* Quad::acq_VerX_List(int* vertex_count)
+changingvertex* Quad::acq_VerX_List(int* vertex_count)
 {
 	*vertex_count = 4;
 	return this->VerX_List;

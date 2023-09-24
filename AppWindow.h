@@ -6,6 +6,7 @@
 #include "DEVICECONTEXT.h"
 
 #include "VERTEXBUFFER.h"
+#include "CONSTANTBUFFER.h"
 
 #include "VERTEXSHADER.h"
 #include "PIXELSHADER.h"
@@ -29,12 +30,19 @@ public:
 
 private:
 	SWAPCHAIN* m_swap_chain;
+	
 	VERTEXBUFFER* m_vb;
+	CONSTANTBUFFER* m_cb;
+
 	VERTEXSHADER* m_vs;
 	PIXELSHADER* m_ps;
+	
 
 	std::vector<PRIMITIVE*> primitive_List;
 
+	unsigned long m_old_time = 0;
+	float m_delta_time = 0;
+	float m_angle = 0;
 	
 };
 

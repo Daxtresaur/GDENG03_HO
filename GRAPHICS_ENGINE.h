@@ -5,6 +5,7 @@
 class SWAPCHAIN;
 class DEVICECONTEXT;
 class VERTEXBUFFER;
+class CONSTANTBUFFER;
 class VERTEXSHADER;
 class PIXELSHADER;
 
@@ -22,7 +23,10 @@ public:
 	// Device Creation
 	SWAPCHAIN* createSwapChain();
 	DEVICECONTEXT* getImmediateDeviceContext();
+
 	VERTEXBUFFER* createVertexBuffer();
+	CONSTANTBUFFER* createConstantBuffer();
+
 	VERTEXSHADER* createVertexShader(const void* shader_byte_code, size_t byte_code_size);
 	PIXELSHADER* createPixelShader(const void* shader_byte_code, size_t byte_code_size);
 
@@ -57,9 +61,13 @@ private:
 	ID3D11PixelShader* m_ps = nullptr;
 
 	friend class SWAPCHAIN;
+	
 	friend class VERTEXBUFFER;
+	friend class CONSTANTBUFFER;
+
 	friend class VERTEXSHADER;
 	friend class PIXELSHADER;
+	
 
 };
 

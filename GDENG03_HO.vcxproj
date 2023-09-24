@@ -134,6 +134,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AppWindow.cpp" />
+    <ClCompile Include="CONSTANTBUFFER.cpp" />
     <ClCompile Include="DEVICECONTEXT.cpp" />
     <ClCompile Include="GRAPHICS_ENGINE.cpp" />
     <ClCompile Include="MAIN.cpp" />
@@ -148,6 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h" />
+    <ClInclude Include="CONSTANTBUFFER.h" />
     <ClInclude Include="DEVICECONTEXT.h" />
     <ClInclude Include="GRAPHICS_ENGINE.h" />
     <ClInclude Include="PIXELSHADER.h" />

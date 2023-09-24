@@ -2,7 +2,10 @@
 #include <d3d11.h>
 
 class SWAPCHAIN;
+
 class VERTEXBUFFER;
+class CONSTANTBUFFER;
+
 class VERTEXSHADER;
 class PIXELSHADER;
 
@@ -25,6 +28,10 @@ public:
 	void setVertexShader(VERTEXSHADER* vertex_shader);
 	void setPixelShader(PIXELSHADER* pixel_shader);
 
+	//Buffer Setup
+	void setConstantBuffer(VERTEXSHADER* vertex_shader, CONSTANTBUFFER* buffer);
+	void setConstantBuffer(PIXELSHADER* pixel_shader, CONSTANTBUFFER* buffer);
+
 	bool release();
 	~DEVICECONTEXT();
 
@@ -32,6 +39,8 @@ public:
 
 private:
 	ID3D11DeviceContext* m_device_context;
+
+	friend class CONSTANTBUFFER;
 
 };
 
