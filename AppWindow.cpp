@@ -48,8 +48,8 @@ void AppWindow::onCreate()
 	size_t size_shader = 0;
 	GRAPHICS_ENGINE::get()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shader_byte_code, &size_shader);
 
-	std::vector<vertex> vertexVector;
-	vertex* currentSet = nullptr;
+	std::vector<changingvertex> vertexVector;
+	changingvertex* currentSet = nullptr;
 	int currentCount = 0;
 	int totalCount = 0;
 
@@ -61,7 +61,7 @@ void AppWindow::onCreate()
 		totalCount += currentCount;
 	}
 
-	vertex* complete_vertex_list = new vertex[totalCount];
+	changingvertex* complete_vertex_list = new changingvertex[totalCount];
 	std::copy(vertexVector.begin(), vertexVector.end(), complete_vertex_list);
 
 	m_vs = GRAPHICS_ENGINE::get()->createVertexShader(shader_byte_code, size_shader);
