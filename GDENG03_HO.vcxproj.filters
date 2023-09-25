@@ -78,7 +78,9 @@
     <ClCompile Include="VERTEXSHADER.cpp">
       <Filter>GameEngine\Shaders\VertexShader</Filter>
     </ClCompile>
-    <ClCompile Include="CONSTANTBUFFER.cpp" />
+    <ClCompile Include="CONSTANTBUFFER.cpp">
+      <Filter>GameEngine\Graphics Engine\Buffers\ConstantBuffer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -114,7 +116,9 @@
     <ClInclude Include="VERTEXSHADER.h">
       <Filter>GameEngine\Shaders\VertexShader</Filter>
     </ClInclude>
-    <ClInclude Include="CONSTANTBUFFER.h" />
+    <ClInclude Include="CONSTANTBUFFER.h">
+      <Filter>GameEngine\Graphics Engine\Buffers\ConstantBuffer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="VertexShader.hlsl">
