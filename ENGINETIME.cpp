@@ -4,13 +4,20 @@ ENGINETIME* ENGINETIME::sharedInstance = nullptr;
 
 void ENGINETIME::initialize()
 {
-	sharedInstance = new ENGINETIME();
+
+	if (!sharedInstance)
+	{
+		sharedInstance = new ENGINETIME();
+	}
+	
 }
 
 double ENGINETIME::getDeltaTime()
 {
-	return sharedInstance->deltaTime;
+	std::chrono::duration<double> deltaTime = sharedInstance->start - sharedInstance->end;
+	return deltaTime.count();
 }
+
 
 ENGINETIME::ENGINETIME()
 {

@@ -8,9 +8,10 @@ class WINDOW;
 class ENGINETIME
 {
 public:
+	
 	static void initialize();
 	static double getDeltaTime();
-
+    
 private:
 	ENGINETIME();
 	~ENGINETIME();

@@ -97,7 +97,7 @@ void AppWindow::onCreate()
 
 	void* shader_byte_code = nullptr;
 	size_t size_shader = 0;
-	GRAPHICS_ENGINE::get()->compileVertexShader(L"VertexShaderAnim.hlsl", "vsmain", &shader_byte_code, &size_shader);
+	GRAPHICS_ENGINE::get()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shader_byte_code, &size_shader);
 
 	m_vs = GRAPHICS_ENGINE::get()->createVertexShader(shader_byte_code, size_shader);
 
@@ -105,12 +105,11 @@ void AppWindow::onCreate()
 
 	GRAPHICS_ENGINE::get()->releaseCompiledShader();
 
-	GRAPHICS_ENGINE::get()->compilePixelShader(L"PixelShaderAnim.hlsl", "psmain", &shader_byte_code, &size_shader);
+	GRAPHICS_ENGINE::get()->compilePixelShader(L"PixelShader.hlsl", "psmain", &shader_byte_code, &size_shader);
 	m_ps = GRAPHICS_ENGINE::get()->createPixelShader(shader_byte_code, size_shader);
 	GRAPHICS_ENGINE::get()->releaseCompiledShader();
 
 	RENDERER::getInstance()->initializeQuadConst();
-
 
 }
 

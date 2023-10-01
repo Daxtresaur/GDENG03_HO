@@ -43,6 +43,8 @@ void Quad::initConstBuffers()
 
 void Quad::drawShape(VERTEXSHADER* m_vs, PIXELSHADER* m_ps)
 {
+	ENGINETIME::initialize();
+
 	cc.m_angle += static_cast<float>(speed * ENGINETIME::getDeltaTime());
 	if (!decrease) {
 		speed += ENGINETIME::getDeltaTime();
