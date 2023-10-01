@@ -136,11 +136,13 @@
     <ClCompile Include="AppWindow.cpp" />
     <ClCompile Include="CONSTANTBUFFER.cpp" />
     <ClCompile Include="DEVICECONTEXT.cpp" />
+    <ClCompile Include="ENGINETIME.cpp" />
     <ClCompile Include="GRAPHICS_ENGINE.cpp" />
     <ClCompile Include="MAIN.cpp" />
     <ClCompile Include="PIXELSHADER.cpp" />
     <ClCompile Include="PRIMITIVE.cpp" />
     <ClCompile Include="Quad.cpp" />
+    <ClCompile Include="RENDERER.cpp" />
     <ClCompile Include="SWAPCHAIN.cpp" />
     <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="VERTEXBUFFER.cpp" />
@@ -151,10 +153,12 @@
     <ClInclude Include="AppWindow.h" />
     <ClInclude Include="CONSTANTBUFFER.h" />
     <ClInclude Include="DEVICECONTEXT.h" />
+    <ClInclude Include="ENGINETIME.h" />
     <ClInclude Include="GRAPHICS_ENGINE.h" />
     <ClInclude Include="PIXELSHADER.h" />
     <ClInclude Include="PRIMITIVE.h" />
     <ClInclude Include="Quad.h" />
+    <ClInclude Include="RENDERER.h" />
     <ClInclude Include="SWAPCHAIN.h" />
     <ClInclude Include="Triangle.h" />
     <ClInclude Include="VERTEXBUFFER.h" />

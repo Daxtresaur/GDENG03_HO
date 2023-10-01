@@ -40,6 +40,12 @@
     <Filter Include="GameEngine\Graphics Engine\Buffers\ConstantBuffer">
       <UniqueIdentifier>{566383bc-9d15-409e-8348-02933aa2d403}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\EngineTime">
+      <UniqueIdentifier>{f65c5e97-2eb8-4905-9291-f1415cba541f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Graphics Engine\Renderer">
+      <UniqueIdentifier>{6d62e1a7-25d2-441f-9323-7788fbbb91d5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MAIN.cpp">
@@ -78,7 +84,13 @@
     <ClCompile Include="VERTEXSHADER.cpp">
       <Filter>GameEngine\Shaders\VertexShader</Filter>
     </ClCompile>
-    <ClCompile Include="CONSTANTBUFFER.cpp" />
+    <ClCompile Include="CONSTANTBUFFER.cpp">
+      <Filter>GameEngine\Graphics Engine\Buffers\ConstantBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="ENGINETIME.cpp">
+      <Filter>GameEngine\EngineTime</Filter>
+    </ClCompile>
+    <ClCompile Include="RENDERER.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -114,7 +126,13 @@
     <ClInclude Include="VERTEXSHADER.h">
       <Filter>GameEngine\Shaders\VertexShader</Filter>
     </ClInclude>
-    <ClInclude Include="CONSTANTBUFFER.h" />
+    <ClInclude Include="CONSTANTBUFFER.h">
+      <Filter>GameEngine\Graphics Engine\Buffers\ConstantBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="ENGINETIME.h">
+      <Filter>GameEngine\EngineTime</Filter>
+    </ClInclude>
+    <ClInclude Include="RENDERER.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="VertexShader.hlsl">

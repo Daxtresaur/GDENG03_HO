@@ -1,10 +1,13 @@
 #include "PRIMITIVE.h"
 
-PRIMITIVE::PRIMITIVE(changingvertex origin)
+void PRIMITIVE::initialize()
 {
 }
 
-PRIMITIVE::~PRIMITIVE()
+void PRIMITIVE::destroy()
 {
-	delete[] VerX_List;
+}
+
+void PRIMITIVE::drawShape(VERTEXSHADER* m_vs, PIXELSHADER* m_ps)
+{
 }

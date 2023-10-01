@@ -1,30 +1,84 @@
 #include "Quad.h"
 #include "GRAPHICS_ENGINE.h"
-#include "DEVICECONTEXT.h"
+#include "ENGINETIME.h"
 #include <vector>
 
-Quad::Quad(changingvertex origin, changingvertex pointA, changingvertex pointB, changingvertex pointC) : PRIMITIVE(origin)
+Quad::Quad()
 {
-	this->VerX_List = new changingvertex[4];
-
-	this->VerX_List[0] = origin;
-	this->VerX_List[1] = pointA;
-	this->VerX_List[2] = pointB;
-	this->VerX_List[3] = pointC;
-}
-
-changingvertex* Quad::acq_VerX_List(int* vertex_count)
-{
-	*vertex_count = 4;
-	return this->VerX_List;
-}
-
-void Quad::drawShape(UINT* vertex_index)
-{
-	GRAPHICS_ENGINE::get()->getImmediateDeviceContext()->drawTriangleStrip(4, *vertex_index);
-	*vertex_index += 4;
 }
 
 Quad::~Quad()
+{
+}
+
+void Quad::initialize()
+{
+	PRIMITIVE::initialize();
+}
+
+void Quad::destroy()
+{
+	PRIMITIVE::destroy();
+}
+
+void Quad::initBuffers(vertex list[], void* shader_byte_code, size_t size_shader)
+{
+	m_vb = GRAPHICS_ENGINE::get()->createVertexBuffer();
+	std::cout << list->position.x << std::endl;
+	m_vb->load(list, sizeof(vertex), 4, shader_byte_code, size_shader);
+}
+
+void Quad::initAnimBuffers(vertexAnim listAnim[], void* shader_byte_code, size_t size_shader)
+{
+	m_vb = GRAPHICS_ENGINE::get()->createVertexBuffer();
+	std::cout << listAnim->position.x << std::endl;
+	m_vb->load(listAnim, sizeof(vertexAnim), 4, shader_byte_code, size_shader);
+}
+
+void Quad::initConstBuffers()
+{
+	cc.m_angle = 0.0f;
+	m_cb = GRAPHICS_ENGINE::get()->createConstantBuffer();
+	m_cb->load(&cc, sizeof(constant));
+}
+
+void Quad::drawShape(VERTEXSHADER* m_vs, PIXELSHADER* m_ps)
+{
+	cc.m_angle += static_cast<float>(speed * ENGINETIME::getDeltaTime());
+	if (!decrease) {
+		speed += ENGINETIME::getDeltaTime();
+		if (speed >= 10)
+		{
+			decrease = true;
+		}
+	}
+	if (decrease) {
+		speed -= ENGINETIME::getDeltaTime();
+		if (speed <= 2)
+		{
+			decrease = false;
+		}
+	}
+
+
+	m_cb->update(GRAPHICS_ENGINE::get()->getImmediateDeviceContext(), &cc);
+
+
+	//SET DEFAULT SHADER IN THE GRAPHICS PIPELINE TO BE ABLE TO DRAW
+	GRAPHICS_ENGINE::get()->getImmediateDeviceContext()->setVertexShader(m_vs);
+	GRAPHICS_ENGINE::get()->getImmediateDeviceContext()->setPixelShader(m_ps);
+
+
+	GRAPHICS_ENGINE::get()->getImmediateDeviceContext()->setConstantBuffer(m_vs, m_cb);
+	GRAPHICS_ENGINE::get()->getImmediateDeviceContext()->setConstantBuffer(m_ps, m_cb);
+
+	//SET THE VERTICES OF THE TRIANGLE TO DRAW
+	GRAPHICS_ENGINE::get()->getImmediateDeviceContext()->setVertexBuffer(m_vb);
+
+	// FINALLY DRAW THE TRIANGLE
+	GRAPHICS_ENGINE::get()->getImmediateDeviceContext()->drawTriangleStrip(m_vb->getSizeVertexList(), 0);
+}
+
+void Quad::releaseBuffers()
 {
 }

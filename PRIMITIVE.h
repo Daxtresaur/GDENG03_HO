@@ -1,49 +1,18 @@
 #pragma once
-#include "AppWindow.h"
-
-struct vec3
-{
-	float x, y, z;
-};
-
-struct vertex
-{
-	vec3 position;
-	vec3 color;
-};
-
-struct changingvertex
-{
-	vec3 position;
-	vec3 position1;
-	vec3 color;
-	vec3 color1;
-};
-
-
-__declspec(align(16))
-
-struct constant
-{
-	float m_angle;
-};
+#include "VERTEXSHADER.h"
+#include "PIXELSHADER.h"
 
 class PRIMITIVE
 {
 public:
-	PRIMITIVE(changingvertex origin);
 
-	//virtual void setPosition(vertex newPos) = 0;
-	//virtual void getVertexSize() = 0;
+	virtual void initialize();
+	virtual void destroy();
+	virtual void drawShape(VERTEXSHADER* m_vs, PIXELSHADER* m_ps);
 
-	virtual changingvertex* acq_VerX_List(int* vertex_count)=0;
-	virtual void drawShape(UINT* vertex_index)=0;
+	//virtual changingvertex* acq_VerX_List(int* vertex_count)=0;
 
-
-	~PRIMITIVE();
-
-protected:
-	changingvertex* VerX_List = nullptr;
+	//changingvertex* VerX_List = nullptr;
 
 };
 
