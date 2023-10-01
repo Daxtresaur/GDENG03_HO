@@ -64,8 +64,12 @@ void AppWindow::onCreate()
 	changingvertex* complete_vertex_list = new changingvertex[totalCount];
 	std::copy(vertexVector.begin(), vertexVector.end(), complete_vertex_list);
 
+<<<<<<< HEAD
 	m_vs = GRAPHICS_ENGINE::get()->createVertexShader(shader_byte_code, size_shader);
 	m_vb->load(complete_vertex_list, sizeof(vertex), totalCount, shader_byte_code, size_shader);
+=======
+	m_vb->load(completeVertexList, sizeof(vertex), 3, shader_byte_code, size_shader);
+>>>>>>> parent of 7950551 (Quad_E2_2)
 
 	GRAPHICS_ENGINE::get()->releaseCompiledShader();
 
