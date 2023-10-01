@@ -11,9 +11,25 @@
 
 #include <d3dcompiler.h>
 
+GRAPHICS_ENGINE* GRAPHICS_ENGINE::sharedInstance = nullptr;
+
 GRAPHICS_ENGINE::GRAPHICS_ENGINE()
 {
 	
+}
+
+void GRAPHICS_ENGINE::initialize()
+{
+	sharedInstance = new GRAPHICS_ENGINE();
+	sharedInstance->init();
+}
+
+void GRAPHICS_ENGINE::destroy()
+{
+	if (sharedInstance != NULL)
+	{
+		sharedInstance->release();
+	}
 }
 
 bool GRAPHICS_ENGINE::init()

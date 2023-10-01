@@ -69,9 +69,6 @@
     <ClCompile Include="VERTEXBUFFER.cpp">
       <Filter>GameEngine\Graphics Engine\Buffers\VertexBuffer</Filter>
     </ClCompile>
-    <ClCompile Include="Triangle.cpp">
-      <Filter>GameEngine\Graphics Engine\Primitives</Filter>
-    </ClCompile>
     <ClCompile Include="PRIMITIVE.cpp">
       <Filter>GameEngine\Graphics Engine\Primitives</Filter>
     </ClCompile>
@@ -90,7 +87,9 @@
     <ClCompile Include="ENGINETIME.cpp">
       <Filter>GameEngine\EngineTime</Filter>
     </ClCompile>
-    <ClCompile Include="RENDERER.cpp" />
+    <ClCompile Include="RENDERER.cpp">
+      <Filter>GameEngine\Graphics Engine\Renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -111,9 +110,6 @@
     <ClInclude Include="VERTEXBUFFER.h">
       <Filter>GameEngine\Graphics Engine\Buffers\VertexBuffer</Filter>
     </ClInclude>
-    <ClInclude Include="Triangle.h">
-      <Filter>GameEngine\Graphics Engine\Primitives</Filter>
-    </ClInclude>
     <ClInclude Include="PRIMITIVE.h">
       <Filter>GameEngine\Graphics Engine\Primitives</Filter>
     </ClInclude>
@@ -132,13 +128,21 @@
     <ClInclude Include="ENGINETIME.h">
       <Filter>GameEngine\EngineTime</Filter>
     </ClInclude>
-    <ClInclude Include="RENDERER.h" />
+    <ClInclude Include="RENDERER.h">
+      <Filter>GameEngine\Graphics Engine\Renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="VertexShader.hlsl">
       <Filter>App</Filter>
     </FxCompile>
     <FxCompile Include="PixelShader.hlsl">
+      <Filter>App</Filter>
+    </FxCompile>
+    <FxCompile Include="PixelShaderAnim.hlsl">
+      <Filter>App</Filter>
+    </FxCompile>
+    <FxCompile Include="VertexShaderAnim.hlsl">
       <Filter>App</Filter>
     </FxCompile>
   </ItemGroup>

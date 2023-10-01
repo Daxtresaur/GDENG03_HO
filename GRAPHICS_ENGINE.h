@@ -14,6 +14,10 @@ class GRAPHICS_ENGINE
 {
 public:
 	GRAPHICS_ENGINE();
+
+	void initialize();
+	void destroy();
+
 	//Initialize the GraphicsEngine and DirectX 11 Device
 	bool init();
 	//Release all the resources loaded
@@ -43,6 +47,8 @@ public:
 	
 
 private:
+	static GRAPHICS_ENGINE* sharedInstance;
+
 	ID3D11Device* m_d3d_device;
 	D3D_FEATURE_LEVEL m_feature_level;
 	ID3D11DeviceContext* m_imm_context;

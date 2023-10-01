@@ -21,14 +21,13 @@ void Quad::destroy()
 	PRIMITIVE::destroy();
 }
 
-void Quad::initBuffers(vertex list[], void* shader_byte_code, size_t size_shader)
+void Quad::initBuffers(struct vertex list_anim[], void* shader_byte_code, size_t size_shader)
 {
 	m_vb = GRAPHICS_ENGINE::get()->createVertexBuffer();
-	std::cout << list->position.x << std::endl;
-	m_vb->load(list, sizeof(vertex), 4, shader_byte_code, size_shader);
+	m_vb->load(list_anim, sizeof(vertex), 4, shader_byte_code, size_shader);
 }
 
-void Quad::initAnimBuffers(vertexAnim listAnim[], void* shader_byte_code, size_t size_shader)
+void Quad::initAnimBuffers(struct vertexAnim listAnim[], void* shader_byte_code, size_t size_shader)
 {
 	m_vb = GRAPHICS_ENGINE::get()->createVertexBuffer();
 	std::cout << listAnim->position.x << std::endl;

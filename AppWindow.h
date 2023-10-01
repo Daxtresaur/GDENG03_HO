@@ -12,7 +12,7 @@
 #include "PIXELSHADER.h"
 
 #include "PRIMITIVE.h"
-#include "Triangle.h"
+//#include "Triangle.h"
 #include "Quad.h"
 
 #include <vector>
@@ -20,6 +20,10 @@
 class AppWindow: public WINDOW
 {
 public:
+	static AppWindow* getInstance();
+	static void initialize();
+	static void destroy();
+
 	AppWindow();
 	~AppWindow();
 
@@ -29,6 +33,8 @@ public:
 	void onDestroy() override;
 
 private:
+	static AppWindow* sharedInstance;
+
 	SWAPCHAIN* m_swap_chain;
 	
 	VERTEXBUFFER* m_vb;
