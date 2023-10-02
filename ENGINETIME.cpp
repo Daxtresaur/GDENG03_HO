@@ -10,6 +10,8 @@ void ENGINETIME::initialize()
 		sharedInstance = new ENGINETIME();
 	}
 	
+	LogFrameStart();
+	LogFrameEnd();
 }
 
 double ENGINETIME::getDeltaTime()
@@ -34,9 +36,9 @@ void ENGINETIME::LogFrameStart()
 
 void ENGINETIME::LogFrameEnd()
 {
+	
 	sharedInstance->end = std::chrono::system_clock::now();
 	std::chrono::duration<double> elapsed_seconds = sharedInstance->end - sharedInstance->start;
 
 	sharedInstance->deltaTime = elapsed_seconds.count();
-
 }

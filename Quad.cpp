@@ -2,6 +2,7 @@
 #include "GRAPHICS_ENGINE.h"
 #include "ENGINETIME.h"
 #include <vector>
+#include<iostream>
 
 Quad::Quad()
 {
@@ -43,9 +44,9 @@ void Quad::initConstBuffers()
 
 void Quad::drawShape(VERTEXSHADER* m_vs, PIXELSHADER* m_ps)
 {
-	ENGINETIME::initialize();
-
+	
 	cc.m_angle += static_cast<float>(speed * ENGINETIME::getDeltaTime());
+	
 	if (!decrease) {
 		speed += ENGINETIME::getDeltaTime();
 		if (speed >= 10)
@@ -60,7 +61,6 @@ void Quad::drawShape(VERTEXSHADER* m_vs, PIXELSHADER* m_ps)
 			decrease = false;
 		}
 	}
-
 
 	m_cb->update(GRAPHICS_ENGINE::get()->getImmediateDeviceContext(), &cc);
 

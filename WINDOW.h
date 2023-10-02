@@ -1,5 +1,6 @@
 #pragma once
 #include <Windows.h>
+#include "ENGINETIME.h"
 
 
 class WINDOW
