@@ -73,8 +73,6 @@ bool WINDOW::init()
 	// Flag is set to indicate that the window is initialized and running
 	m_is_run = true;
 
-	ENGINETIME::initialize();
-
 	return true;
 }
 
@@ -82,11 +80,7 @@ bool WINDOW::broadcast()
 {
 	MSG msg;
 
-	ENGINETIME::LogFrameStart();
-
 	this->onUpdate();
-
-	ENGINETIME::LogFrameEnd();
 
 	while (::PeekMessage(&msg, NULL,0,0,PM_REMOVE)>0)
 	{

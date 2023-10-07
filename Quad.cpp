@@ -2,11 +2,15 @@
 
 #include "AppWindow.h"
 #include "ENGINETIME.h"
+<<<<<<< HEAD
 #include "RENDERER.h"
 #include "DEVICECONTEXT.h"
 #include "CONSTANTBUFFER.h"
 #include "VERTEXBUFFER.h"
 
+=======
+#include <vector>
+>>>>>>> parent of ffd8982 (Stop Point 1 - Progress 4)
 
 Quad::Quad()
 {
@@ -89,8 +93,31 @@ void Quad::initConstBuffers()
 
 void Quad::drawShape(VERTEXSHADER* m_vs, PIXELSHADER* m_ps)
 {
+<<<<<<< HEAD
 	
 	updatePosition();
+=======
+	ENGINETIME::initialize();
+
+	cc.m_angle += static_cast<float>(speed * ENGINETIME::getDeltaTime());
+	if (!decrease) {
+		speed += ENGINETIME::getDeltaTime();
+		if (speed >= 10)
+		{
+			decrease = true;
+		}
+	}
+	if (decrease) {
+		speed -= ENGINETIME::getDeltaTime();
+		if (speed <= 2)
+		{
+			decrease = false;
+		}
+	}
+
+
+	m_cb->update(GRAPHICS_ENGINE::get()->getImmediateDeviceContext(), &cc);
+>>>>>>> parent of ffd8982 (Stop Point 1 - Progress 4)
 
 
 	//SET DEFAULT SHADER IN THE GRAPHICS PIPELINE TO BE ABLE TO DRAW
