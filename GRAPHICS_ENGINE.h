@@ -6,6 +6,7 @@ class SWAPCHAIN;
 class DEVICECONTEXT;
 class VERTEXBUFFER;
 class CONSTANTBUFFER;
+class INDEXBUFFER;
 class VERTEXSHADER;
 class PIXELSHADER;
 
@@ -30,6 +31,7 @@ public:
 
 	VERTEXBUFFER* createVertexBuffer();
 	CONSTANTBUFFER* createConstantBuffer();
+	INDEXBUFFER* createIndexBuffer();
 
 	VERTEXSHADER* createVertexShader(const void* shader_byte_code, size_t byte_code_size);
 	PIXELSHADER* createPixelShader(const void* shader_byte_code, size_t byte_code_size);
@@ -70,6 +72,7 @@ private:
 	
 	friend class VERTEXBUFFER;
 	friend class CONSTANTBUFFER;
+	friend class INDEXBUFFER;
 
 	friend class VERTEXSHADER;
 	friend class PIXELSHADER;

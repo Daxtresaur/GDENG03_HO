@@ -5,6 +5,7 @@ class SWAPCHAIN;
 
 class VERTEXBUFFER;
 class CONSTANTBUFFER;
+class INDEXBUFFER;
 
 class VERTEXSHADER;
 class PIXELSHADER;
@@ -16,9 +17,11 @@ public:
 
 	void clearRenderTargetColor(SWAPCHAIN* swap_chain, float red, float green, float blue, float alpha);
 	void setVertexBuffer(VERTEXBUFFER* vertex_buffer);
+	void setIndexBuffer(INDEXBUFFER* index_buffer);
 
 	//Primitive Drawing
 	void drawTriangleList(UINT vertex_count, UINT start_vertex_index);
+	void drawIndexedTriangleList(UINT index_count, UINT start_vertex_index, UINT start_index_location);
 	void drawTriangleStrip(UINT vertex_count, UINT start_vertex_index);
 
 	// Viewport Setup

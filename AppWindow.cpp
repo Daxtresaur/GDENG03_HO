@@ -1,5 +1,7 @@
 #include "AppWindow.h"
 #include <Windows.h>
+#include "VECTOR3D.h"
+#include "MATRIX4X4.h"
 
 #include "RENDERER.h"
 

@@ -138,12 +138,15 @@
     <ClCompile Include="DEVICECONTEXT.cpp" />
     <ClCompile Include="ENGINETIME.cpp" />
     <ClCompile Include="GRAPHICS_ENGINE.cpp" />
+    <ClCompile Include="INDEXBUFFER.cpp" />
     <ClCompile Include="MAIN.cpp" />
+    <ClCompile Include="MATRIX4X4.cpp" />
     <ClCompile Include="PIXELSHADER.cpp" />
     <ClCompile Include="PRIMITIVE.cpp" />
     <ClCompile Include="Quad.cpp" />
     <ClCompile Include="RENDERER.cpp" />
     <ClCompile Include="SWAPCHAIN.cpp" />
+    <ClCompile Include="VECTOR3D.cpp" />
     <ClCompile Include="VERTEXBUFFER.cpp" />
     <ClCompile Include="VERTEXSHADER.cpp" />
     <ClCompile Include="WINDOW.cpp" />
@@ -154,11 +157,14 @@
     <ClInclude Include="DEVICECONTEXT.h" />
     <ClInclude Include="ENGINETIME.h" />
     <ClInclude Include="GRAPHICS_ENGINE.h" />
+    <ClInclude Include="INDEXBUFFER.h" />
+    <ClInclude Include="MATRIX4X4.h" />
     <ClInclude Include="PIXELSHADER.h" />
     <ClInclude Include="PRIMITIVE.h" />
     <ClInclude Include="Quad.h" />
     <ClInclude Include="RENDERER.h" />
     <ClInclude Include="SWAPCHAIN.h" />
+    <ClInclude Include="VECTOR3D.h" />
     <ClInclude Include="VERTEXBUFFER.h" />
     <ClInclude Include="VERTEXSHADER.h" />
     <ClInclude Include="WINDOW.h" />
@@ -171,21 +177,7 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="PixelShaderAnim.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </FxCompile>
     <FxCompile Include="VertexShader.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </FxCompile>
-    <FxCompile Include="VertexShaderAnim.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>

@@ -116,6 +116,11 @@ CONSTANTBUFFER* GRAPHICS_ENGINE::createConstantBuffer()
 	return new CONSTANTBUFFER();
 }
 
+INDEXBUFFER* GRAPHICS_ENGINE::createIndexBuffer()
+{
+	return new INDEXBUFFER();
+}
+
 VERTEXSHADER* GRAPHICS_ENGINE::createVertexShader(const void* shader_byte_code, size_t byte_code_size)
 {
 	VERTEXSHADER* vs = new VERTEXSHADER();

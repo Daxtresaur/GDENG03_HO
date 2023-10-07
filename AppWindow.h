@@ -7,12 +7,12 @@
 
 #include "VERTEXBUFFER.h"
 #include "CONSTANTBUFFER.h"
+#include "INDEXBUFFER.h"
 
 #include "VERTEXSHADER.h"
 #include "PIXELSHADER.h"
 
 #include "PRIMITIVE.h"
-//#include "Triangle.h"
 #include "Quad.h"
 
 #include <vector>
@@ -39,9 +39,11 @@ private:
 	
 	VERTEXBUFFER* m_vb;
 	CONSTANTBUFFER* m_cb;
+	INDEXBUFFER* m_ib;
 
 	VERTEXSHADER* m_vs;
 	PIXELSHADER* m_ps;
+	
 	
 
 	std::vector<PRIMITIVE*> primitive_List;
@@ -51,6 +53,9 @@ private:
 	float m_angle = 0;
 
 	float mElapsedTime = 0.f;
-	
+
+	float m_delta_pos;
+	float m_delta_scale;
+	float m_delta_rot;
 };
 
