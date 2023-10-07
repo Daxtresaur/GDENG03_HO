@@ -4,6 +4,7 @@
 #include "SWAPCHAIN.h"
 
 #include "VERTEXBUFFER.h"
+#include "INDEXBUFFER.h"
 #include "CONSTANTBUFFER.h"
 
 #include "VERTEXSHADER.h"
@@ -109,6 +110,11 @@ DEVICECONTEXT* GRAPHICS_ENGINE::getImmediateDeviceContext()
 VERTEXBUFFER* GRAPHICS_ENGINE::createVertexBuffer()
 {
 	return new VERTEXBUFFER();
+}
+
+INDEXBUFFER* GRAPHICS_ENGINE::createIndexBuffer()
+{
+	return new INDEXBUFFER();
 }
 
 CONSTANTBUFFER* GRAPHICS_ENGINE::createConstantBuffer()

@@ -6,6 +6,7 @@
 #include "DEVICECONTEXT.h"
 
 #include "VERTEXBUFFER.h"
+#include "INDEXBUFFER.h"
 #include "CONSTANTBUFFER.h"
 
 #include "VERTEXSHADER.h"
@@ -32,6 +33,8 @@ public:
 	void onUpdate() override;
 	void onDestroy() override;
 
+	float move_cube = 0.0f;
+
 private:
 	static AppWindow* sharedInstance;
 
@@ -42,6 +45,7 @@ private:
 
 	VERTEXSHADER* m_vs;
 	PIXELSHADER* m_ps;
+	INDEXBUFFER* m_ib;
 	
 
 	std::vector<PRIMITIVE*> primitive_List;
@@ -51,6 +55,9 @@ private:
 	float m_angle = 0;
 
 	float mElapsedTime = 0.f;
-	
+
+	float m_delta_pos;
+	float m_delta_scale;
+	float m_delta_rot;
 };
 

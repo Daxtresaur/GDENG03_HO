@@ -1,21 +1,23 @@
 #pragma once
+#pragma once
 #include <iostream>
 #include "PRIMITIVE.h"
 #include "GRAPHICS_ENGINE.h"
 #include "VERTEXSHADER.h"
 #include "PIXELSHADER.h"
+#include "VECTOR3D.h"
+#include "Quad.h"
 
-class Quad : public PRIMITIVE
+class CUBE : public PRIMITIVE
 {
 public:
-	Quad();
-	~Quad();
+	CUBE();
+	~CUBE();
 
 	void initialize(std::string name) override;
 	void destroy() override;
 
-	void initBuffers(void* shader_byte_code, size_t size_shader);
-	void initAnimBuffers(void* shader_byte_code, size_t size_shader);
+	void initBuffers(void* shader_byte_code, size_t size_shader, int num);
 	void initConstBuffers();
 	void drawShape(VERTEXSHADER* m_vs, PIXELSHADER* m_ps) override;
 	void releaseBuffers();
@@ -25,15 +27,25 @@ public:
 private:
 	VERTEXBUFFER* m_vb;
 	CONSTANTBUFFER* m_cb;
+	INDEXBUFFER* m_ib;
 
 	constant cc;
-	double speed = 2;
-	bool decrease = false;
 
-	float m_delta_pos;
-	float m_delta_scale;
 
-	Quad(Quad const&) {}
-	Quad& operator=(Quad const&) {}
+	//no.2
+	VECTOR3D rotation;
+
+	//no.3
+	VECTOR3D translation;
+	VECTOR3D scaling;
+	bool i_trans;
+	bool i_scale;
+
+
+	int num = 0;
+
+	CUBE(CUBE const&) {}
+	CUBE& operator=(CUBE const&) {}
 
 };
+

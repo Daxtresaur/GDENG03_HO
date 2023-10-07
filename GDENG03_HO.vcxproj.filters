@@ -46,6 +46,12 @@
     <Filter Include="GameEngine\Graphics Engine\Renderer">
       <UniqueIdentifier>{6d62e1a7-25d2-441f-9323-7788fbbb91d5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\Graphics Engine\Buffers\IndexBuffer">
+      <UniqueIdentifier>{d42d43f0-6ef8-4133-90c1-85ce4e838869}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Graphics Engine\Vectors&amp;Matrices">
+      <UniqueIdentifier>{fe05c58f-4224-4fa5-8842-a06b00b20c24}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MAIN.cpp">
@@ -90,6 +96,12 @@
     <ClCompile Include="RENDERER.cpp">
       <Filter>GameEngine\Graphics Engine\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="INDEXBUFFER.cpp">
+      <Filter>GameEngine\Graphics Engine\Buffers\IndexBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="CUBE.cpp">
+      <Filter>GameEngine\Graphics Engine\Primitives</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -131,18 +143,27 @@
     <ClInclude Include="RENDERER.h">
       <Filter>GameEngine\Graphics Engine\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="INDEXBUFFER.h">
+      <Filter>GameEngine\Graphics Engine\Buffers\IndexBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="CUBE.h">
+      <Filter>GameEngine\Graphics Engine\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="VECTOR3D.h">
+      <Filter>GameEngine\Graphics Engine\Vectors&amp;Matrices</Filter>
+    </ClInclude>
+    <ClInclude Include="MATRIX4X4.h">
+      <Filter>GameEngine\Graphics Engine\Vectors&amp;Matrices</Filter>
+    </ClInclude>
+    <ClInclude Include="VECTOR4D.h">
+      <Filter>GameEngine\Graphics Engine\Vectors&amp;Matrices</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="VertexShader.hlsl">
       <Filter>App</Filter>
     </FxCompile>
     <FxCompile Include="PixelShader.hlsl">
-      <Filter>App</Filter>
-    </FxCompile>
-    <FxCompile Include="PixelShaderAnim.hlsl">
-      <Filter>App</Filter>
-    </FxCompile>
-    <FxCompile Include="VertexShaderAnim.hlsl">
       <Filter>App</Filter>
     </FxCompile>
   </ItemGroup>
