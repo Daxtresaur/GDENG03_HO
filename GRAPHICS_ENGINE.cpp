@@ -5,6 +5,7 @@
 
 #include "VERTEXBUFFER.h"
 #include "CONSTANTBUFFER.h"
+#include "INDEXBUFFER.h"
 
 #include "VERTEXSHADER.h"
 #include "PIXELSHADER.h"
