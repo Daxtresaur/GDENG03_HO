@@ -12,6 +12,14 @@ public:
 	VECTOR3D(const VECTOR3D& vector) :m_x(vector.m_x), m_y(vector.m_y), m_z(vector.m_z)
 	{
 	}
+	VECTOR3D operator *(float num)
+	{
+		return VECTOR3D(m_x * num, m_y * num, m_z * num);
+	}
+	VECTOR3D operator +(VECTOR3D vec)
+	{
+		return VECTOR3D(m_x + vec.m_x, m_y + vec.m_y, m_z + vec.m_z);
+	}
 
 	static VECTOR3D lerp(const VECTOR3D& start, const VECTOR3D& end, float delta)
 	{

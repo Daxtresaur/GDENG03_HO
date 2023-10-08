@@ -14,6 +14,7 @@
 
 #include "PRIMITIVE.h"
 #include "Quad.h"
+#include "Cube.h"
 
 #include <vector>
 

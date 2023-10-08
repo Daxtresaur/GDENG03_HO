@@ -47,54 +47,11 @@ void AppWindow::onCreate()
 	vertexAnim list_anim[] =
 	{
 		//X - Y - Z
-		{-0.1f,-0.3f,0.0f,    -0.3f,-0.3f,0.0f,   1,1,0,  0,1,0 }, // POS1
-		{-0.1f,0.95f,0.0f,     -0.3f,0.5f,0.0f,    1,1,0,  0,1,1 },// POS2
-		{ 0.1f,-0.95f,0.0f,    0.3f,-0.5f,0.0f,   0,1,1,  1,0,0 },// POS2
-		{ 0.1f,0.5f,0.0f,      0.3f,0.5f,0.0f,    1,1,1,  0,0,1 }
+		{VECTOR3D(-0.1f,-0.3f,0.0f),    VECTOR3D(-0.3f,-0.3f,0.0f),   VECTOR3D(1,1,0),  VECTOR3D(0,1,0)}, // POS1
+		{VECTOR3D(-0.1f,0.95f,0.0f),     VECTOR3D(-0.3f,0.5f,0.0f),   VECTOR3D(1,1,0),  VECTOR3D(0,1,1)},// POS2
+		{ VECTOR3D(0.1f,-0.95f,0.0f),    VECTOR3D(0.3f,-0.5f,0.0f),   VECTOR3D(0,1,1),  VECTOR3D(1,0,0)},// POS2
+		{ VECTOR3D(0.1f,0.5f,0.0f),      VECTOR3D(0.3f,0.5f,0.0f),    VECTOR3D(1,1,1),  VECTOR3D(0,0,1)}
 
-	};
-
-	vertexAnim list_anim2[] =
-	{
-		//X - Y - Z
-		{-0.78f,-0.8f,0.0f,    -0.32f,-0.11f,0.0f,   0,0,0,  0,1,0 }, // POS1
-		{-0.9f,0.08f,0.0f,     -0.11f,0.78f,0.0f,    1,1,0,  0,1,1 }, // POS2
-		{ 0.1f,-0.2f,0.0f,     0.75f,-0.73f,0.0f,   0,0,1,  1,0,0 },// POS2
-		{ -0.05f,0.15f,0.0f,      0.88f,0.77f,0.0f,    1,1,1,  0,0,1 }
-
-	};
-
-	vertexAnim list_anim3[] =
-	{
-		//X - Y - Z
-		{  -0.75f,-0.8f,0.0f,  -0.15f,-0.4f,0.0f,   0,0,0,  0,1,0 }, // POS1
-		{  -0.9f,-0.1f,0.0f, -0.05f,0.45f,0.0f,    1,1,0,  0,1,1 }, // POS2
-		{  0.85f,-0.55f,0.0f, 0.0f,-0.75f,0.0f,   0,0,1,  1,0,0 },// POS2
-		{  -0.75f,-0.8f,0.0f,  0.85f,0.4f,0.0f,     1,1,1,  0,0,1 }
-	};
-
-	vertex list1[] =
-	{
-		{-0.1f,-0.3f,0.0f,   1,1,0}, // POS1
-		{-0.1f,0.95f,0.0f,    1,0,0}, // POS2
-		{ 0.1f,-0.95f,0.0f,   0,0,1}, // POS3
-		{ 0.1f,0.5f,0.0f,    0,1,0.4f}
-	};
-
-	vertex list2[] =
-	{
-		{-0.9f,-0.9f,0.0f,   1,0,0}, // POS1
-		{-0.9f,0.9f,0.0f,    0,1,0}, // POS2
-		{ -0.3f,-0.9f,0.0f,   0,0,1}, // POS3
-		{ -0.3f,0.9f,0.0f,    1,1,0}
-	};
-
-	vertex list3[] =
-	{
-		{0.3f,-0.6f,0.0f,   1,1,0},
-		{0.3f,0.7f,0.0f,    0,1,1},
-		{ 0.6f,-0.9f,0.0f,   0,0,1},
-		{ 0.9f,0.8f,0.0f,    1,0.3f,0.4f}
 	};
 
 	void* shader_byte_code = nullptr;
@@ -103,7 +60,7 @@ void AppWindow::onCreate()
 
 	m_vs = GRAPHICS_ENGINE::get()->createVertexShader(shader_byte_code, size_shader);
 
-	RENDERER::getInstance()->initializeQuadsAnim(list_anim2, shader_byte_code, size_shader);
+	RENDERER::getInstance()->initializeQuadsAnim(list_anim, shader_byte_code, size_shader);
 
 	GRAPHICS_ENGINE::get()->releaseCompiledShader();
 
