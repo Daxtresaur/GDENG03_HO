@@ -12,9 +12,9 @@ Quad::~Quad()
 {
 }
 
-void Quad::initialize()
+void Quad::initialize(std::string name)
 {
-	PRIMITIVE::initialize();
+	PRIMITIVE::initialize(name);
 }
 
 void Quad::destroy()

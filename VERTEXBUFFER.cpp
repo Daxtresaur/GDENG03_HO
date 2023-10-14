@@ -43,6 +43,13 @@ bool VERTEXBUFFER::load(void* list_vertices, UINT size_vertex, UINT size_list, v
 		{ "COLOR", 0,  DXGI_FORMAT_R32G32B32_FLOAT, 0, 24,D3D11_INPUT_PER_VERTEX_DATA ,0 },
 		{ "COLOR", 1,  DXGI_FORMAT_R32G32B32_FLOAT, 0, 36,D3D11_INPUT_PER_VERTEX_DATA ,0 }
 	};
+	D3D11_INPUT_ELEMENT_DESC layout_cube[] =
+	{
+		//SEMANTIC NAME - SEMANTIC INDEX - FORMAT - INPUT SLOT - ALIGNED BYTE OFFSET - INPUT SLOT CLASS - INSTANCE DATA STEP RATE
+		{"POSITION", 0,  DXGI_FORMAT_R32G32B32_FLOAT, 0, 0,D3D11_INPUT_PER_VERTEX_DATA ,0},
+		{ "COLOR", 0,  DXGI_FORMAT_R32G32B32_FLOAT, 0, 12,D3D11_INPUT_PER_VERTEX_DATA ,0 },
+		{ "COLOR", 1,  DXGI_FORMAT_R32G32B32_FLOAT, 0, 24,D3D11_INPUT_PER_VERTEX_DATA ,0 }
+	};
 
 	/*WITHOUT ANIMS*/
 	/*
@@ -55,9 +62,9 @@ bool VERTEXBUFFER::load(void* list_vertices, UINT size_vertex, UINT size_list, v
 	*/
 
 	/*WITH ANIMS*/
-	UINT size_layout = ARRAYSIZE(layout_anim);
+	UINT size_layout = ARRAYSIZE(layout_cube);
 
-	if (FAILED(GRAPHICS_ENGINE::get()->m_d3d_device->CreateInputLayout(layout_anim, size_layout, shader_byte_code, size_byte_shader, &m_layout)))
+	if (FAILED(GRAPHICS_ENGINE::get()->m_d3d_device->CreateInputLayout(layout_cube, size_layout, shader_byte_code, size_byte_shader, &m_layout)))
 	{
 		return false;
 	}

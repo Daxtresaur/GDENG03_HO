@@ -25,18 +25,18 @@ void RENDERER::destroy()
 
 }
 
-void RENDERER::initializeQuads(struct vertexAnim list[], void* shader_byte_code, size_t size_shader)
+void RENDERER::initializeQuads(std::string name, struct vertexAnim list[], void* shader_byte_code, size_t size_shader)
 {
 	Quad* tempQuad = new Quad();
-	tempQuad->initialize();
+	tempQuad->initialize(name);
 	tempQuad->initBuffers(list, shader_byte_code, size_shader);
 	insertQuads(tempQuad);
 }
 
-void RENDERER::initializeQuadsAnim(struct vertexAnim list[], void* shader_byte_code, size_t size_shader)
+void RENDERER::initializeQuadsAnim(std::string name, struct vertexAnim list[], void* shader_byte_code, size_t size_shader)
 {
 	Quad* tempQuad = new Quad();
-	tempQuad->initialize();
+	tempQuad->initialize(name);
 	tempQuad->initAnimBuffers(list, shader_byte_code, size_shader);
 	insertQuads(tempQuad);
 }
@@ -64,14 +64,14 @@ std::list<Quad*>  RENDERER::getQuadList()
 	return vertexBufferList;
 }
 
-void RENDERER::initializeCube(void* shader_byte_code, size_t size_shader, int num = 0)
+void RENDERER::initializeCube(std::string name, void* shader_byte_code, size_t size_shader, int num = 0)
 {
 	std::random_device rd; // obtain a random number from hardware
 	std::mt19937 gen(rd()); // seed the generator
 	std::uniform_real_distribution<> distr(-0.75, 0.75); // define the range
 
 	Cube* cube = new Cube();
-	cube->initialize();
+	cube->initialize(name);
 	cube->initBuffers(shader_byte_code, size_shader, num);
 
 	float x = distr(gen);
@@ -87,6 +87,7 @@ void RENDERER::initializeCube(void* shader_byte_code, size_t size_shader, int nu
 
 void RENDERER::initializeCubeConst()
 {
+	
 	for (auto const& i : sharedInstance->getCubeList()) {
 		i->initConstBuffers();
 	}
@@ -103,6 +104,7 @@ void RENDERER::releaseCubes()
 
 std::list<Cube*> RENDERER::getCubeList()
 {
+	std::cout << cubeList.size() << std::endl;
 	return cubeList;
 }
 

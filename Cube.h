@@ -13,7 +13,7 @@ public:
 	Cube();
 	~Cube();
 
-	void initialize() override;
+	void initialize(std::string name) override;
 	void destroy() override;
 
 	void initBuffers(void* shader_byte_code, size_t size_shader, int num);

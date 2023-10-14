@@ -21,14 +21,14 @@ public:
 	static void initialize();
 	static void destroy();
 
-	void initializeQuads(vertexAnim list[], void* shader_byte_code, size_t size_shader);
-	void initializeQuadsAnim(vertexAnim list[], void* shader_byte_code, size_t size_shader);
+	void initializeQuads(std::string name, vertexAnim list[], void* shader_byte_code, size_t size_shader);
+	void initializeQuadsAnim(std::string name, vertexAnim list[], void* shader_byte_code, size_t size_shader);
 	void initializeQuadConst();
 	void insertQuads(class Quad* quad);
 	void releaseQuads();
 	std::list<class Quad*> getQuadList();
 
-	void initializeCube(void* shader_byte_code, size_t size_shader, int num);
+	void initializeCube(std::string name, void* shader_byte_code, size_t size_shader, int num);
 	void initializeCubeConst();
 	void insertCube(class Cube* cube);
 	void releaseCubes();

@@ -33,6 +33,7 @@ public:
 	void onUpdate() override;
 	void onDestroy() override;
 
+
 private:
 	static AppWindow* sharedInstance;
 

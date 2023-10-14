@@ -40,14 +40,31 @@ class PRIMITIVE
 {
 public:
 
-	virtual void initialize();
+	virtual void initialize(std::string name);
 	virtual void destroy();
 	virtual void drawShape(VERTEXSHADER* m_vs, PIXELSHADER* m_ps);
 
+	void setPosition(float x, float y, float z);
+	void setPosition(VECTOR3D pos);
+	VECTOR3D getLocalPosition();
+
+	void setScale(float x, float y, float z);
+	void setScale(VECTOR3D scale);
+	VECTOR3D getLocalScale();
+
+	void setRotation(float x, float y, float z);
+	void setRotation(VECTOR3D rot);
+	VECTOR3D getLocalRotation();
+
+	 
 	//virtual changingvertex* acq_VerX_List(int* vertex_count)=0;
 
 protected:
 	std::string name;
+	VECTOR3D localPosition;
+	VECTOR3D localRotation;
+	VECTOR3D localScale;
+	MATRIX4X4 localMatrix;
 	//changingvertex* VerX_List = nullptr;
 
 };
