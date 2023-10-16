@@ -134,40 +134,47 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AppWindow.cpp" />
-    <ClCompile Include="CONSTANTBUFFER.cpp" />
+    <ClCompile Include="ConstantBuffer.cpp" />
     <ClCompile Include="Cube.cpp" />
-    <ClCompile Include="DEVICECONTEXT.cpp" />
-    <ClCompile Include="ENGINETIME.cpp" />
-    <ClCompile Include="GRAPHICS_ENGINE.cpp" />
-    <ClCompile Include="INDEXBUFFER.cpp" />
+    <ClCompile Include="DeviceContext.cpp" />
+    <ClCompile Include="EngineTime.cpp" />
+    <ClCompile Include="GraphicsEngine.cpp" />
+    <ClCompile Include="IndexBuffer.cpp" />
+    <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="MAIN.cpp" />
-    <ClCompile Include="PIXELSHADER.cpp" />
-    <ClCompile Include="PRIMITIVE.cpp" />
-    <ClCompile Include="Quad.cpp" />
-    <ClCompile Include="RENDERER.cpp" />
-    <ClCompile Include="SWAPCHAIN.cpp" />
-    <ClCompile Include="VERTEXBUFFER.cpp" />
-    <ClCompile Include="VERTEXSHADER.cpp" />
-    <ClCompile Include="WINDOW.cpp" />
+    <ClCompile Include="MathUtils.cpp" />
+    <ClCompile Include="Matrix4x4.cpp" />
+    <ClCompile Include="PixelShader.cpp" />
+    <ClCompile Include="AGameObject.cpp" />
+    <ClCompile Include="Point.cpp" />
+    <ClCompile Include="SwapChain.cpp" />
+    <ClCompile Include="Utilities.cpp" />
+    <ClCompile Include="Vector3D.cpp" />
+    <ClCompile Include="VertexBuffer.cpp" />
+    <ClCompile Include="VertexShader.cpp" />
+    <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h" />
-    <ClInclude Include="CONSTANTBUFFER.h" />
+    <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="Cube.h" />
-    <ClInclude Include="DEVICECONTEXT.h" />
-    <ClInclude Include="ENGINETIME.h" />
-    <ClInclude Include="GRAPHICS_ENGINE.h" />
-    <ClInclude Include="INDEXBUFFER.h" />
-    <ClInclude Include="MATRIX4X4.h" />
-    <ClInclude Include="PIXELSHADER.h" />
-    <ClInclude Include="PRIMITIVE.h" />
-    <ClInclude Include="Quad.h" />
-    <ClInclude Include="RENDERER.h" />
-    <ClInclude Include="SWAPCHAIN.h" />
-    <ClInclude Include="VECTOR3D.h" />
-    <ClInclude Include="VERTEXBUFFER.h" />
-    <ClInclude Include="VERTEXSHADER.h" />
-    <ClInclude Include="WINDOW.h" />
+    <ClInclude Include="DeviceContext.h" />
+    <ClInclude Include="EngineTime.h" />
+    <ClInclude Include="GraphicsEngine.h" />
+    <ClInclude Include="IndexBuffer.h" />
+    <ClInclude Include="InputListener.h" />
+    <ClInclude Include="InputSystem.h" />
+    <ClInclude Include="MathUtils.h" />
+    <ClInclude Include="Matrix4x4.h" />
+    <ClInclude Include="PixelShader.h" />
+    <ClInclude Include="AGameObject.h" />
+    <ClInclude Include="Point.h" />
+    <ClInclude Include="SwapChain.h" />
+    <ClInclude Include="Utilities.h" />
+    <ClInclude Include="Vector3D.h" />
+    <ClInclude Include="VertexBuffer.h" />
+    <ClInclude Include="VertexShader.h" />
+    <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="PixelShader.hlsl">

@@ -1,70 +1,43 @@
-#include "VERTEXBUFFER.h"
-#include "GRAPHICS_ENGINE.h"
+#include "VertexBuffer.h"
+#include "GraphicsEngine.h"
 
-VERTEXBUFFER::VERTEXBUFFER():m_layout(0), m_buffer(0)
+VertexBuffer::VertexBuffer():m_input_layout(0), m_buffer(0)
 {
 }
 
-bool VERTEXBUFFER::load(void* list_vertices, UINT size_vertex, UINT size_list, void* shader_byte_code, size_t size_byte_shader)
+bool VertexBuffer::load(void* list_vertices, UINT size_vertex, UINT size_list, void* shader_byte_code, size_t size_byte_shader)
 {
-	if (m_buffer)m_buffer->Release();
-	if (m_layout)m_layout->Release();
+	if (m_buffer) m_buffer->Release();
+	if (m_input_layout) m_input_layout->Release();
 
 	D3D11_BUFFER_DESC buff_desc = {};
-	buff_desc.Usage = D3D11_USAGE_DEFAULT;
-	buff_desc.ByteWidth = size_vertex * size_list;
-	buff_desc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-	buff_desc.CPUAccessFlags = 0;
-	buff_desc.MiscFlags = 0;
+	buff_desc.Usage = D3D11_USAGE_DEFAULT; // read and write rules for the buffer
+	buff_desc.ByteWidth = size_vertex * size_list; // size of the vertex buffer
+	buff_desc.BindFlags = D3D11_BIND_VERTEX_BUFFER; // dictates where the vertex buffer will be bound to in the render pipeline
+	buff_desc.CPUAccessFlags = 0;	// read/write rules of the CPU for the buffer
+	buff_desc.MiscFlags = 0; // contains a variety of settings or flags that can be enabled for the vertex buffer
 
-	D3D11_SUBRESOURCE_DATA init_data = {};
-	init_data.pSysMem = list_vertices;
+	D3D11_SUBRESOURCE_DATA init_data = {};	// initialization data for the vertex buffer to be created
+	init_data.pSysMem = list_vertices; // pSysMem is a pointer to the initialization data
 
 	m_size_vertex = size_vertex;
 	m_size_list = size_list;
 
-	if (FAILED(GRAPHICS_ENGINE::get()->m_d3d_device->CreateBuffer(&buff_desc, &init_data, &m_buffer)))
+	if (FAILED(GraphicsEngine::get()->m_d3d_device->CreateBuffer(&buff_desc, &init_data, &m_buffer)))
 	{
 		return false;
 	}
 
 	D3D11_INPUT_ELEMENT_DESC layout[] =
 	{
-		//SEMANTIC NAME - SEMANTIC INDEX - FORMAT - INPUT SLOT - ALIGNED BYTE OFFSET - INPUT SLOT CLASS - INSTANCE DATA STEP RATE
-		{"POSITION", 0,  DXGI_FORMAT_R32G32B32_FLOAT, 0, 0,D3D11_INPUT_PER_VERTEX_DATA ,0},
-		{ "COLOR", 0,  DXGI_FORMAT_R32G32B32_FLOAT, 0, 12,D3D11_INPUT_PER_VERTEX_DATA ,0 },
+		{"POSITION",	0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0},
+		{"COLOR", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		{"COLOR", 1, DXGI_FORMAT_R32G32B32_FLOAT, 0, 24, D3D11_INPUT_PER_VERTEX_DATA, 0 }
 	};
 
-	D3D11_INPUT_ELEMENT_DESC layout_anim[] =
-	{
-		//SEMANTIC NAME - SEMANTIC INDEX - FORMAT - INPUT SLOT - ALIGNED BYTE OFFSET - INPUT SLOT CLASS - INSTANCE DATA STEP RATE
-		{"POSITION", 0,  DXGI_FORMAT_R32G32B32_FLOAT, 0, 0,D3D11_INPUT_PER_VERTEX_DATA ,0},
-		{"POSITION", 1,  DXGI_FORMAT_R32G32B32_FLOAT, 0, 12,D3D11_INPUT_PER_VERTEX_DATA ,0 },
-		{ "COLOR", 0,  DXGI_FORMAT_R32G32B32_FLOAT, 0, 24,D3D11_INPUT_PER_VERTEX_DATA ,0 },
-		{ "COLOR", 1,  DXGI_FORMAT_R32G32B32_FLOAT, 0, 36,D3D11_INPUT_PER_VERTEX_DATA ,0 }
-	};
-	D3D11_INPUT_ELEMENT_DESC layout_cube[] =
-	{
-		//SEMANTIC NAME - SEMANTIC INDEX - FORMAT - INPUT SLOT - ALIGNED BYTE OFFSET - INPUT SLOT CLASS - INSTANCE DATA STEP RATE
-		{"POSITION", 0,  DXGI_FORMAT_R32G32B32_FLOAT, 0, 0,D3D11_INPUT_PER_VERTEX_DATA ,0},
-		{ "COLOR", 0,  DXGI_FORMAT_R32G32B32_FLOAT, 0, 12,D3D11_INPUT_PER_VERTEX_DATA ,0 },
-		{ "COLOR", 1,  DXGI_FORMAT_R32G32B32_FLOAT, 0, 24,D3D11_INPUT_PER_VERTEX_DATA ,0 }
-	};
-
-	/*WITHOUT ANIMS*/
-	/*
 	UINT size_layout = ARRAYSIZE(layout);
 
-	if (FAILED(GRAPHICS_ENGINE::get()->m_d3d_device->CreateInputLayout(layout, size_layout, shader_byte_code, size_byte_shader, &m_layout)))
-	{
-		return false;
-	}
-	*/
-
-	/*WITH ANIMS*/
-	UINT size_layout = ARRAYSIZE(layout_cube);
-
-	if (FAILED(GRAPHICS_ENGINE::get()->m_d3d_device->CreateInputLayout(layout_cube, size_layout, shader_byte_code, size_byte_shader, &m_layout)))
+	if (FAILED(GraphicsEngine::get()->m_d3d_device->CreateInputLayout(layout, size_layout, shader_byte_code, size_byte_shader, &m_input_layout)))
 	{
 		return false;
 	}
@@ -73,19 +46,19 @@ bool VERTEXBUFFER::load(void* list_vertices, UINT size_vertex, UINT size_list, v
 }
 
 
-UINT VERTEXBUFFER::getSizeVertexList()
+UINT VertexBuffer::getSizeVertexList()
 {
 	return this->m_size_list;
 }
 
-bool VERTEXBUFFER::release()
+bool VertexBuffer::release()
 {
-	m_layout->Release();
+	m_input_layout->Release();
 	m_buffer->Release();
 	delete this;
 	return true;
 }
 
-VERTEXBUFFER::~VERTEXBUFFER()
+VertexBuffer::~VertexBuffer()
 {
 }

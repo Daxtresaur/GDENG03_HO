@@ -1,30 +1,32 @@
 #pragma once
-#include "WINDOW.h"
-#include "GRAPHICS_ENGINE.h"
-
-#include "SWAPCHAIN.h"
-#include "DEVICECONTEXT.h"
-
-#include "VERTEXBUFFER.h"
-#include "CONSTANTBUFFER.h"
-#include "INDEXBUFFER.h"
-
-#include "VERTEXSHADER.h"
-#include "PIXELSHADER.h"
-
-#include "PRIMITIVE.h"
-#include "Quad.h"
-#include "Cube.h"
-
 #include <vector>
 
-class AppWindow: public WINDOW
+#include"Window.h"
+#include"GraphicsEngine.h"
+#include"InputSystem.h"
+
+#include"SwapChain.h"
+#include"DeviceContext.h"
+
+#include"VertexBuffer.h"
+#include"IndexBuffer.h"
+#include"ConstantBuffer.h"
+
+#include"VertexShader.h"
+#include"PixelShader.h"
+
+#include"AGameObject.h"
+#include"Cube.h"
+
+#include"Vector3D.h"
+#include"Matrix4x4.h"
+
+#include "MathUtils.h"
+#include "Utilities.h"
+
+class AppWindow: public Window, public InputListener
 {
 public:
-	static AppWindow* getInstance();
-	static void initialize();
-	static void destroy();
-
 	AppWindow();
 	~AppWindow();
 
@@ -33,31 +35,32 @@ public:
 	void onUpdate() override;
 	void onDestroy() override;
 
+	virtual void onKeyDown(int key) override;
+	virtual void onKeyUp(int key) override;
+
+	virtual void onMouseMove(const Point deltaPos);
+
+	virtual void onLeftMouseDown(const Point deltaPos);
+	virtual void onLeftMouseUp(const Point deltaPos);
+
+	virtual void onRightMouseDown(const Point deltaPos);
+	virtual void onRightMouseUp(const Point deltaPos);
 
 private:
 	static AppWindow* sharedInstance;
 
-	SWAPCHAIN* m_swap_chain;
+	std::vector<Cube*> cubeList;
+
+	float ticks = 0.0f;
+
+	SwapChain* m_swap_chain;
 	
-	VERTEXBUFFER* m_vb;
-	CONSTANTBUFFER* m_cb;
-	INDEXBUFFER* m_ib;
+	VertexBuffer* m_vb;
+	ConstantBuffer* m_cb;
+	IndexBuffer* m_ib;
 
-	VERTEXSHADER* m_vs;
-	PIXELSHADER* m_ps;
+	VertexShader* m_vs;
+	PixelShader* m_ps;
 	
-	
-
-	std::vector<PRIMITIVE*> primitive_List;
-
-	unsigned long m_old_time = 0;
-	float m_delta_time = 0;
-	float m_angle = 0;
-
-	float mElapsedTime = 0.f;
-
-	float m_delta_pos;
-	float m_delta_scale;
-	float m_delta_rot;
 };
 

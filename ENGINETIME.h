@@ -3,9 +3,9 @@
 #include <chrono>
 #include <ctime>
 
-class WINDOW;
+class Window;
 
-class ENGINETIME
+class EngineTime
 {
 public:
 	
@@ -13,13 +13,13 @@ public:
 	static double getDeltaTime();
     
 private:
-	ENGINETIME();
-	~ENGINETIME();
+	EngineTime();
+	~EngineTime();
 
-	ENGINETIME(ENGINETIME const&) {}
-	ENGINETIME& operator=(ENGINETIME const&) {}
+	EngineTime(EngineTime const&) {}
+	EngineTime& operator=(EngineTime const&) {}
 
-	static ENGINETIME* sharedInstance;
+	static EngineTime* sharedInstance;
 	std::chrono::system_clock::time_point start;
 	std::chrono::system_clock::time_point end;
 
@@ -27,6 +27,6 @@ private:
 	static void LogFrameStart();
 	static void LogFrameEnd();
 
-	friend class WINDOW;
+	friend class Window;
 };
 

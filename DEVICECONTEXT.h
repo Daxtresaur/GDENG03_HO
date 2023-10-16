@@ -1,23 +1,33 @@
 #pragma once
 #include <d3d11.h>
 
-class SWAPCHAIN;
+// Forward declaration of a class. Acts similar to #include, but can only use pointers / references to that class.
+class SwapChain;
 
-class VERTEXBUFFER;
-class CONSTANTBUFFER;
-class INDEXBUFFER;
+class VertexBuffer;
+class ConstantBuffer;
+class IndexBuffer;
 
-class VERTEXSHADER;
-class PIXELSHADER;
+class VertexShader;
+class PixelShader;
 
-class DEVICECONTEXT
+class DeviceContext
 {
 public:
-	DEVICECONTEXT(ID3D11DeviceContext* device_context);
+	DeviceContext(ID3D11DeviceContext* device_context);
 
-	void clearRenderTargetColor(SWAPCHAIN* swap_chain, float red, float green, float blue, float alpha);
-	void setVertexBuffer(VERTEXBUFFER* vertex_buffer);
-	void setIndexBuffer(INDEXBUFFER* index_buffer);
+	void clearRenderTargetColor(SwapChain* swap_chain, float red, float green, float blue, float alpha);
+	
+	//Shader Setup
+	void setVertexShader(VertexShader* vertex_shader);
+	void setPixelShader(PixelShader* pixel_shader);
+
+	//Buffer Setup
+	void setVertexBuffer(VertexBuffer* vertex_buffer);
+	void setIndexBuffer(IndexBuffer* index_buffer);
+
+	void setConstantBuffer(VertexShader* vertex_shader, ConstantBuffer* buffer);
+	void setConstantBuffer(PixelShader* pixel_shader, ConstantBuffer* buffer);
 
 	//Primitive Drawing
 	void drawTriangleList(UINT vertex_count, UINT start_vertex_index);
@@ -27,23 +37,12 @@ public:
 	// Viewport Setup
 	void setViewportSize(UINT width, UINT height);
 
-	//Shader Setup
-	void setVertexShader(VERTEXSHADER* vertex_shader);
-	void setPixelShader(PIXELSHADER* pixel_shader);
-
-	//Buffer Setup
-	void setConstantBuffer(VERTEXSHADER* vertex_shader, CONSTANTBUFFER* buffer);
-	void setConstantBuffer(PIXELSHADER* pixel_shader, CONSTANTBUFFER* buffer);
-
 	bool release();
-	~DEVICECONTEXT();
+	~DeviceContext();
 
-
+	ID3D11DeviceContext* getDeviceContext();
 
 private:
 	ID3D11DeviceContext* m_device_context;
-
-	friend class CONSTANTBUFFER;
-
 };
 

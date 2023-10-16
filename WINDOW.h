@@ -3,16 +3,16 @@
 #include "ENGINETIME.h"
 
 
-class WINDOW
+class Window
 {
 public:
-	WINDOW();
+	Window();
 	// Initializes the window
 	bool init();
 	bool broadcast();
 	// Releases the window
 	bool release();
-	bool isRun();
+	bool isRunning();
 
 	RECT getClientWindowRect();
 	void setHWND(HWND hwnd);
@@ -22,11 +22,11 @@ public:
 	virtual void onUpdate() =0;
 	virtual void onDestroy();
 
-	virtual ~WINDOW();
+	virtual ~Window();
 
 protected:
 	HWND m_hwnd;
-	bool m_is_run;
+	bool m_is_running;
 };
 
 

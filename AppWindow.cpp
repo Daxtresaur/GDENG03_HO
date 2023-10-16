@@ -1,30 +1,8 @@
 #include "AppWindow.h"
-#include <Windows.h>
-#include "VECTOR3D.h"
-#include "MATRIX4X4.h"
+#define _USE_MATH_DEFINES
+#include <iostream>
+#include <math.h>
 
-#include "RENDERER.h"
-
-AppWindow* AppWindow::sharedInstance = nullptr;
-
-AppWindow* AppWindow::getInstance()
-{
-	return sharedInstance;
-}
-
-void AppWindow::initialize()
-{
-	sharedInstance = new AppWindow();
-	sharedInstance->init();
-}
-
-void AppWindow::destroy()
-{
-	if (sharedInstance != NULL)
-	{
-		sharedInstance->onDestroy();
-	}
-}
 
 AppWindow::AppWindow()
 {
@@ -36,70 +14,121 @@ AppWindow::~AppWindow()
 
 void AppWindow::onCreate()
 {
-	WINDOW::onCreate();
-	GRAPHICS_ENGINE::get()->init();
+	GraphicsEngine::get()->init();
+	GraphicsEngine* graphEngine = GraphicsEngine::get();
+	EngineTime::initialize();
+	InputSystem::initialize();
+	InputSystem::getInstance()->addListener(this);
 
-	m_swap_chain = GRAPHICS_ENGINE::get()->createSwapChain();
-	
-	RECT rc = this->getClientWindowRect();
+	m_swap_chain = GraphicsEngine::get()->createSwapChain();
 
+	RECT rc = getClientWindowRect();
+
+	std::cout << "hwnd: " << this->m_hwnd;
 	m_swap_chain->init(this->m_hwnd, rc.right - rc.left, rc.bottom - rc.top);
 
-	RENDERER::initialize();
-	
-	void* shader_byte_code = nullptr;
-	size_t size_shader = 0;
-	GRAPHICS_ENGINE::get()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shader_byte_code, &size_shader);
+	void* shaderByteCode = nullptr;
+	size_t sizeShader = 0;
 
-	m_vs = GRAPHICS_ENGINE::get()->createVertexShader(shader_byte_code, size_shader);
+	//compile basic vertex shader
+	graphEngine->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shaderByteCode, &sizeShader);
+	this->m_vs = graphEngine->createVertexShader(shaderByteCode, sizeShader);
 
-	RENDERER::getInstance()->initializeCube("CUBE1",shader_byte_code, size_shader, 0);
-	RENDERER::getInstance()->initializeCube("CUBE2", shader_byte_code, size_shader, 0);
-	RENDERER::getInstance()->initializeCube("CUBE3", shader_byte_code, size_shader, 0);
-	RENDERER::getInstance()->initializeCube("CUBE4", shader_byte_code, size_shader, 0);
+	for (int i = 0; i < 15; i++) {
+		float x = MathUtils::randomFloat(-0.75, 0.75f);
+		float y = MathUtils::randomFloat(-0.75, 0.75f);
+		float z = MathUtils::randomFloat(-0.75, 0.75f);
 
+		Cube* cubeObject = new Cube("Cube", shaderByteCode, sizeShader);
+		cubeObject->setAnimSpeed(MathUtils::randomFloat(-3.75f, 3.75f));
+		cubeObject->setPosition(Vector3D(x, y, z));
+		cubeObject->setScale(Vector3D(0.25, 0.25, 0.25));
+		this->cubeList.push_back(cubeObject);
+	}
 
-	GRAPHICS_ENGINE::get()->releaseCompiledShader();
+	graphEngine->releaseCompiledShader(); // this must be called after compilation of each shader
 
-	GRAPHICS_ENGINE::get()->compilePixelShader(L"PixelShader.hlsl", "psmain", &shader_byte_code, &size_shader);
-	m_ps = GRAPHICS_ENGINE::get()->createPixelShader(shader_byte_code, size_shader);
-	GRAPHICS_ENGINE::get()->releaseCompiledShader();
+	//compile basic pixel shader
+	graphEngine->compilePixelShader(L"PixelShader.hlsl", "psmain", &shaderByteCode, &sizeShader);
+	this->m_ps = graphEngine->createPixelShader(shaderByteCode, sizeShader);
 
-	RENDERER::getInstance()->initializeCubeConst();
-
-	
-
+	graphEngine->releaseCompiledShader();
 }
 
 void AppWindow::onUpdate()
 {
 
-	WINDOW::onUpdate();
-	//CLEAR THE RENDER TARGET 
-	GRAPHICS_ENGINE::get()->getImmediateDeviceContext()->clearRenderTargetColor(this->m_swap_chain, 0.3, 0.3, 0.3, 1);
-	//SET VIEWPORT OF RENDER TARGET IN WHICH WE HAVE TO DRAW
+	ticks += EngineTime::getDeltaTime() * 1.0f;
+
+	InputSystem::getInstance()->update();
+
+	GraphicsEngine::get()->getImmediateDeviceContext()->clearRenderTargetColor(m_swap_chain, 0.2f, 0.2f, 0.2f, 1);
 
 	RECT rc = getClientWindowRect();
-	
-	GRAPHICS_ENGINE::get()->getImmediateDeviceContext()->setViewportSize(rc.right - rc.left, rc.bottom - rc.top);
+	int width = rc.right - rc.left;
+	int height = rc.bottom - rc.top;
 
-	for (auto const& i :RENDERER::getInstance()->getCubeList()) {
-		std::cout << "Marker App 1" << std::endl;
-		i->drawShape(m_vs, m_ps);
-		std::cout << "Marker App 2" << std::endl;
+	GraphicsEngine::get()->getImmediateDeviceContext()->setViewportSize(width, height);
+
+	for (int i = 0; i < cubeList.size(); i++) {
+		cubeList[i]->update(EngineTime::getDeltaTime());
+		cubeList[i]->draw(width, height, m_vs, m_ps);
 	}
-
-	
 
 	m_swap_chain->present(true);
 }
 
 void AppWindow::onDestroy()
 {
-	WINDOW::onDestroy();
+	Window::onDestroy();
 	m_swap_chain->release();
+	m_vb->release();
+	m_ib->release();
+	m_cb->release();
+
 	m_vs->release();
 	m_ps->release();
 
-	GRAPHICS_ENGINE::get()->release();
+	InputSystem::destroy();
+	GraphicsEngine::get()->release();
 }
+
+void AppWindow::onKeyDown(int key)
+{
+	cout << "onkeydown:\n";
+	if (InputSystem::getInstance()->isKeyDown('W'))
+	{
+		cout << "W pressed\n";
+	}
+}
+
+void AppWindow::onKeyUp(int key)
+{
+	cout << "onkeyup:\n";
+	if (InputSystem::getInstance()->isKeyUp('W'))
+	{
+		cout << "W released\n";
+	}
+}
+
+void AppWindow::onMouseMove(const Point deltaPos)
+{
+	cout << " mouse moved: " << deltaPos.getX() << ", " << deltaPos.getY() << "\n";
+}
+
+void AppWindow::onLeftMouseDown(const Point deltaPos)
+{
+}
+
+void AppWindow::onLeftMouseUp(const Point deltaPos)
+{
+}
+
+void AppWindow::onRightMouseDown(const Point deltaPos)
+{
+}
+
+void AppWindow::onRightMouseUp(const Point deltaPos)
+{
+}
+

@@ -1,17 +1,32 @@
+/*
+David Rex C. Mayuga
+GDENG03 X22
+HO -- 
+*/
+
+#include <iostream>
 #include "AppWindow.h"
+
+using namespace std;
 
 int main()
 {
-	AppWindow app;
-	if(app.init())
-	{
-		while(app.isRun())
-		{
-			app.broadcast();
-		}
+    AppWindow app;
+    try {
+        if (!app.init())
+            return -1;
 
-	}
+        while (app.isRunning())
+        {
+            app.broadcast();
+        }
 
-	return 0;
+    }
+    catch (const std::exception& err)
+    {
+        cout << err.what();
+        return -1;
+    }
 
+    return 0;
 }

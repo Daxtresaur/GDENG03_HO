@@ -1,15 +1,17 @@
-#include "SWAPCHAIN.h"
+#include "SwapChain.h"
+
 #include <iostream>
-#include "GRAPHICS_ENGINE.h"
 
+#include "GraphicsEngine.h"
+#include "Utilities.h"
 
-SWAPCHAIN::SWAPCHAIN()
+SwapChain::SwapChain()
 {
 }
 
-bool SWAPCHAIN::init(HWND hwnd, UINT width, UINT height)
+bool SwapChain::init(HWND hwnd, UINT width, UINT height)
 {
-	ID3D11Device* device = GRAPHICS_ENGINE::get()->m_d3d_device;
+	ID3D11Device* device = GraphicsEngine::get()->m_d3d_device;
 
 	DXGI_SWAP_CHAIN_DESC desc;
 	ZeroMemory(&desc, sizeof(desc));
@@ -21,12 +23,12 @@ bool SWAPCHAIN::init(HWND hwnd, UINT width, UINT height)
 	desc.BufferDesc.RefreshRate.Denominator = 1;
 	desc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
 	desc.OutputWindow = hwnd;
-	desc.SampleDesc.Count = 1;
+	desc.SampleDesc.Count = 1; // Make sure to set this to 1. 
 	desc.SampleDesc.Quality = 0;
 	desc.Windowed = TRUE;
 
 	//Create the swap chain for the window indicated by HWND parameter
-	HRESULT hr= GRAPHICS_ENGINE::get()->m_dxgi_factory->CreateSwapChain(device, &desc, &m_swap_chain);
+	HRESULT hr = GraphicsEngine::get()->m_dxgi_factory->CreateSwapChain(device, &desc, &m_swap_chain);
 	
 	if (FAILED(hr))
 	{
@@ -43,31 +45,64 @@ bool SWAPCHAIN::init(HWND hwnd, UINT width, UINT height)
 		return false;
 	}
 
-	hr = device->CreateRenderTargetView(buffer, NULL, &m_rtv);
-	buffer->Release();
-
+	m_render_target_view = nullptr;
+	hr = device->CreateRenderTargetView(buffer, NULL, &m_render_target_view);
 	if (FAILED(hr))
 	{
 		return false;
 	}
+	buffer->Release();
+
+	D3D11_TEXTURE2D_DESC texDesc = {};
+	texDesc.Width = width;
+	texDesc.Height = height;
+	texDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+	texDesc.Usage = D3D11_USAGE_DEFAULT;
+	texDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+	texDesc.MipLevels = 1;
+	texDesc.SampleDesc.Count = 1;
+	texDesc.SampleDesc.Quality = 0;
+	texDesc.MiscFlags = 0;
+	texDesc.ArraySize = 1;
+	texDesc.CPUAccessFlags = 0;
+
+	buffer = nullptr;
+	HRESULT depthTexHr = device->CreateTexture2D(&texDesc, NULL, &buffer);
+	Utilities::PrintHResult("SwapChain Depth Stencil Texture Creation: ", depthTexHr);
+
+	HRESULT depthStencilHr = device->CreateDepthStencilView(buffer, NULL, &this->m_depth_stencil_view);
+	Utilities::PrintHResult("SwapChain Depth Stencil View Creation: ", depthStencilHr);
+	buffer->Release();
 
 	return true;
 }
 
-bool SWAPCHAIN::present(bool vsync)
+bool SwapChain::present(bool vsync)
 {
-	m_swap_chain->Present(vsync, NULL);
+	HRESULT res = m_swap_chain->Present(vsync, NULL);
+	if (FAILED(res))
+		return false;
 
 	return true;
 }
 
-bool SWAPCHAIN::release()
+bool SwapChain::release()
 {
 	m_swap_chain->Release();
 	delete this;
 	return true;
 }
 
-SWAPCHAIN::~SWAPCHAIN()
+ID3D11RenderTargetView* SwapChain::getRenderTargetView()
+{
+	return m_render_target_view;
+}
+
+ID3D11DepthStencilView* SwapChain::getDepthStencilView()
+{
+	return m_depth_stencil_view;
+}
+
+SwapChain::~SwapChain()
 {
 }

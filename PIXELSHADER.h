@@ -1,16 +1,16 @@
 #pragma once
 #include <d3d11.h>
+#include "GraphicsEngine.h"
 
-class GRAPHICS_ENGINE;
-class DEVICECONTEXT;
-
-class PIXELSHADER
+class PixelShader
 {
 public:
 
-	PIXELSHADER();
+	PixelShader();
 	void release();
-	~PIXELSHADER();
+	~PixelShader();
+
+	ID3D11PixelShader* getShader();
 
 
 private:
@@ -18,6 +18,6 @@ private:
 	bool init(const void* shader_byte_code, size_t byte_code_size);
 	ID3D11PixelShader* m_ps;
 
-	friend class GRAPHICS_ENGINE;
-	friend class DEVICECONTEXT;
+	friend class GraphicsEngine;
+	friend class DeviceContext;
 };
