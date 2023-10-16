@@ -3,10 +3,10 @@
 #include "Vector3D.h"
 #include "Matrix4x4.h"
 
-using namespace std;
+#include "VertexShader.h"
+#include "PixelShader.h"
 
-class VertexShader;
-class PixelShader;
+using namespace std;
 
 class AGameObject
 {

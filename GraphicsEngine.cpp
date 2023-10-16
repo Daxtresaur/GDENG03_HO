@@ -111,6 +111,11 @@ SwapChain* GraphicsEngine::createSwapChain()
 	return new SwapChain();
 }
 
+ID3D11Device* GraphicsEngine::getDirect3DDevice()
+{
+	return m_d3d_device;
+}
+
 DeviceContext* GraphicsEngine::getImmediateDeviceContext()
 {
 	return this->m_imm_device_context;

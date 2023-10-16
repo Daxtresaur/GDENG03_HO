@@ -2,7 +2,7 @@
 #include "GraphicsEngine.h"
 #include "DeviceContext.h"
 
-Cube::Cube(string name, void* shaderByteCode, size_t sizeShader) :AGameObject(name)
+Cube::Cube(std::string name, void* shaderByteCode, size_t sizeShader) :AGameObject(name)
 {
 	//create buffers for drawing. vertex data that needs to be drawn are temporarily placed here.
 	Vertex quadList[] = {

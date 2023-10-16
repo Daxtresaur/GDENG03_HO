@@ -1,21 +1,16 @@
 #pragma once
 #include "AGameObject.h"
+
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
 #include "ConstantBuffer.h"
 
-#include "VertexShader.h"
-#include "PixelShader.h"
-
-#include "Matrix4x4.h"
-#include "Vector3D.h"
-#include "InputListener.h"
-
+#include <iostream>
 
 class Cube : public AGameObject
 {
 public:
-	Cube(string name, void* shaderByteCode, size_t sizeShader);
+	Cube(std::string name, void* shaderByteCode, size_t sizeShader);
 	~Cube();
 
 	void update(float deltaTime) override;
