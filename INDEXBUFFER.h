@@ -5,14 +5,16 @@ class IndexBuffer
 {
 public:
 	IndexBuffer();
-	void load(void* list_indices, UINT size_list);
-	UINT getIndexListSize();
-	bool release();
 	~IndexBuffer();
 
-private:
-	UINT m_size_list;
-	ID3D11Buffer* m_buffer;
+	void load(void* indexList, UINT listSize);
+	void release();
 
-	friend class DeviceContext;
+	ID3D11Buffer* getBuffer();
+	UINT getIndexSize();
+
+private:
+	UINT listSize;
+	ID3D11Buffer* buffer;
 };
+

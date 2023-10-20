@@ -3,14 +3,13 @@
 #include <iostream>
 #include <math.h>
 
-
-AppWindow::AppWindow()
-{
-}
-
-AppWindow::~AppWindow()
-{
-}
+#include "Cube.h"
+#include "Vector3D.h"
+#include "EngineTime.h"
+#include "GraphicsEngine.h"
+#include "InputSystem.h"
+#include "MathUtils.h"
+#include "Matrix4x4.h"
 
 void AppWindow::onCreate()
 {
@@ -32,9 +31,9 @@ void AppWindow::onCreate()
 
 	//compile basic vertex shader
 	graphEngine->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shaderByteCode, &sizeShader);
-	this->m_vs = graphEngine->createVertexShader(shaderByteCode, sizeShader);
+	this->m_vertex_shader = graphEngine->createVertexShader(shaderByteCode, sizeShader);
 
-	for (int i = 0; i < 15; i++) {
+	for (int i = 0; i < 10; i++) {
 		float x = MathUtils::randomFloat(-0.75, 0.75f);
 		float y = MathUtils::randomFloat(-0.75, 0.75f);
 		float z = MathUtils::randomFloat(-0.75, 0.75f);
@@ -50,14 +49,12 @@ void AppWindow::onCreate()
 
 	//compile basic pixel shader
 	graphEngine->compilePixelShader(L"PixelShader.hlsl", "psmain", &shaderByteCode, &sizeShader);
-	this->m_ps = graphEngine->createPixelShader(shaderByteCode, sizeShader);
-
+	this->m_pixel_shader = graphEngine->createPixelShader(shaderByteCode, sizeShader);
 	graphEngine->releaseCompiledShader();
 }
 
 void AppWindow::onUpdate()
 {
-
 	ticks += EngineTime::getDeltaTime() * 1.0f;
 
 	InputSystem::getInstance()->update();
@@ -72,7 +69,7 @@ void AppWindow::onUpdate()
 
 	for (int i = 0; i < cubeList.size(); i++) {
 		cubeList[i]->update(EngineTime::getDeltaTime());
-		cubeList[i]->draw(width, height, m_vs, m_ps);
+		cubeList[i]->draw(width, height, m_vertex_shader, m_pixel_shader);
 	}
 
 	m_swap_chain->present(true);
@@ -82,12 +79,12 @@ void AppWindow::onDestroy()
 {
 	Window::onDestroy();
 	m_swap_chain->release();
-	m_vb->release();
-	m_ib->release();
-	m_cb->release();
+	m_vertex_buffer->release();
+	m_index_buffer->release();
+	m_constant_buffer->release();
 
-	m_vs->release();
-	m_ps->release();
+	m_vertex_shader->release();
+	m_pixel_shader->release();
 
 	InputSystem::destroy();
 	GraphicsEngine::get()->release();
@@ -132,3 +129,12 @@ void AppWindow::onRightMouseUp(const Point deltaPos)
 {
 }
 
+AppWindow::AppWindow()
+{
+
+}
+
+AppWindow::~AppWindow()
+{
+
+}

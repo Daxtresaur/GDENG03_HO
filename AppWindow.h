@@ -1,39 +1,23 @@
 #pragma once
 #include <vector>
 
-#include"Window.h"
-#include"GraphicsEngine.h"
-#include"InputSystem.h"
+#include "Cube.h"
+#include "InputListener.h"
+#include "Window.h"
+#include "SwapChain.h"
+#include "VertexBuffer.h"
+#include "VertexShader.h"
 
-#include"SwapChain.h"
-#include"DeviceContext.h"
-
-#include"VertexBuffer.h"
-#include"IndexBuffer.h"
-#include"ConstantBuffer.h"
-
-#include"VertexShader.h"
-#include"PixelShader.h"
-
-#include"AGameObject.h"
-#include"Cube.h"
-
-#include"Vector3D.h"
-#include"Matrix4x4.h"
-
-#include "MathUtils.h"
-#include "Utilities.h"
-
-class AppWindow: public Window, public InputListener
+class AppWindow : public Window, public InputListener
 {
 public:
 	AppWindow();
 	~AppWindow();
 
-	//Inherited via Window
-	void onCreate() override;
-	void onUpdate() override;
-	void onDestroy() override;
+	virtual void onCreate() override;
+	virtual void onUpdate() override;
+	virtual void onDestroy() override;
+
 
 	virtual void onKeyDown(int key) override;
 	virtual void onKeyUp(int key) override;
@@ -45,22 +29,17 @@ public:
 
 	virtual void onRightMouseDown(const Point deltaPos);
 	virtual void onRightMouseUp(const Point deltaPos);
-
 private:
-	static AppWindow* sharedInstance;
-
 	std::vector<Cube*> cubeList;
 
 	float ticks = 0.0f;
 
 	SwapChain* m_swap_chain;
-	
-	VertexBuffer* m_vb;
-	ConstantBuffer* m_cb;
-	IndexBuffer* m_ib;
+	VertexBuffer* m_vertex_buffer;
+	ConstantBuffer* m_constant_buffer;
+	IndexBuffer* m_index_buffer;
 
-	VertexShader* m_vs;
-	PixelShader* m_ps;
-	
+	VertexShader* m_vertex_shader;
+	PixelShader* m_pixel_shader;
 };
 

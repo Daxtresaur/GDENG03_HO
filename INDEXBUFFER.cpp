@@ -2,27 +2,31 @@
 #include "GraphicsEngine.h"
 #include <iostream>
 
-IndexBuffer::IndexBuffer() : m_buffer(0)
+IndexBuffer::IndexBuffer()
 {
 }
 
-void IndexBuffer::load(void* list_indices, UINT size_list)
+IndexBuffer::~IndexBuffer()
 {
-	if (this->m_buffer) this->m_buffer->Release();
+}
+
+void IndexBuffer::load(void* indexList, UINT listSize)
+{
+	if (this->buffer) this->buffer->Release();
 
 	D3D11_BUFFER_DESC bufferDesc = {};
 	bufferDesc.Usage = D3D11_USAGE_DEFAULT;
-	bufferDesc.ByteWidth = 4 * m_size_list;
+	bufferDesc.ByteWidth = 4 * listSize;
 	bufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
 	bufferDesc.CPUAccessFlags = 0;
 	bufferDesc.MiscFlags = 0;
 
 	D3D11_SUBRESOURCE_DATA initData = {};
-	initData.pSysMem = list_indices;
-	this->m_size_list = m_size_list;
+	initData.pSysMem = indexList;
+	this->listSize = listSize;
 
 	ID3D11Device* directXDevice = GraphicsEngine::get()->getDirect3DDevice();
-	HRESULT bufferResult = directXDevice->CreateBuffer(&bufferDesc, &initData, &this->m_buffer);
+	HRESULT bufferResult = directXDevice->CreateBuffer(&bufferDesc, &initData, &this->buffer);
 
 	if (SUCCEEDED(bufferResult)) {
 		std::cout << "Creation of index buffer succeeded. \n";
@@ -30,23 +34,20 @@ void IndexBuffer::load(void* list_indices, UINT size_list)
 	else {
 		std::cout << "An error occurred in creating a index buffer. \n";
 	}
-
-
 }
 
-UINT IndexBuffer::getIndexListSize()
+void IndexBuffer::release()
 {
-	return this->m_size_list;
-}
-
-bool IndexBuffer::release()
-{
-	m_buffer->Release();
+	this->buffer->Release();
 	delete this;
-	return true;
 }
 
-
-IndexBuffer::~IndexBuffer()
+ID3D11Buffer* IndexBuffer::getBuffer()
 {
+	return this->buffer;
+}
+
+UINT IndexBuffer::getIndexSize()
+{
+	return this->listSize;
 }

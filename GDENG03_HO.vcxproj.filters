@@ -55,6 +55,9 @@
     <Filter Include="GameEngine\Graphics Engine\InputSystem">
       <UniqueIdentifier>{9a13e0c1-7ed4-474c-837c-2e016ee08ee5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\Graphics Engine\Camera">
+      <UniqueIdentifier>{b3f44588-5110-4ab1-9904-bb8002c7c740}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MAIN.cpp">
@@ -117,6 +120,12 @@
     <ClCompile Include="InputSystem.cpp">
       <Filter>GameEngine\Graphics Engine\InputSystem</Filter>
     </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>GameEngine\Graphics Engine\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector4D.cpp">
+      <Filter>GameEngine\Graphics Engine\MathUtilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -178,6 +187,12 @@
     </ClInclude>
     <ClInclude Include="InputSystem.h">
       <Filter>GameEngine\Graphics Engine\InputSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>GameEngine\Graphics Engine\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector4D.h">
+      <Filter>GameEngine\Graphics Engine\MathUtilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

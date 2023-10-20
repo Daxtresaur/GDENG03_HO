@@ -1,16 +1,13 @@
 #pragma once
 #include "AGameObject.h"
-
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
 #include "ConstantBuffer.h"
 
-#include <iostream>
-
 class Cube : public AGameObject
 {
 public:
-	Cube(std::string name, void* shaderByteCode, size_t sizeShader);
+	Cube(string name, void* shaderByteCode, size_t sizeShader);
 	~Cube();
 
 	void update(float deltaTime) override;

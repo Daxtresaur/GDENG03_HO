@@ -4,24 +4,12 @@ EngineTime* EngineTime::sharedInstance = nullptr;
 
 void EngineTime::initialize()
 {
-	if (!sharedInstance)
-	{
-		sharedInstance = new EngineTime();
-	}
+	sharedInstance = new EngineTime();
 }
 
 double EngineTime::getDeltaTime()
 {
 	return sharedInstance->deltaTime;
-}
-
-
-EngineTime::EngineTime()
-{
-}
-
-EngineTime::~EngineTime()
-{
 }
 
 void EngineTime::LogFrameStart()
@@ -31,9 +19,19 @@ void EngineTime::LogFrameStart()
 
 void EngineTime::LogFrameEnd()
 {
-	
 	sharedInstance->end = std::chrono::system_clock::now();
-	std::chrono::duration<double> elapsed_seconds = sharedInstance->end - sharedInstance->start;
+	const std::chrono::duration<double> elapsed_seconds = sharedInstance->end - sharedInstance->start;
 
 	sharedInstance->deltaTime = elapsed_seconds.count();
 }
+
+EngineTime::EngineTime()
+{
+
+}
+
+EngineTime::~EngineTime()
+{
+
+}
+

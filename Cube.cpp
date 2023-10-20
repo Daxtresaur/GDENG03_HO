@@ -1,8 +1,8 @@
 #include "Cube.h"
 #include "GraphicsEngine.h"
-#include "DeviceContext.h"
+#include "SwapChain.h"
 
-Cube::Cube(std::string name, void* shaderByteCode, size_t sizeShader) :AGameObject(name)
+Cube::Cube(string name, void* shaderByteCode, size_t sizeShader) :AGameObject(name)
 {
 	//create buffers for drawing. vertex data that needs to be drawn are temporarily placed here.
 	Vertex quadList[] = {
@@ -122,7 +122,7 @@ void Cube::draw(int width, int height, VertexShader* vertexShader, PixelShader* 
 	deviceContext->setIndexBuffer(this->indexBuffer);
 	deviceContext->setVertexBuffer(this->vertexBuffer);
 
-	deviceContext->drawIndexedTriangleList(this->indexBuffer->getIndexListSize(), 0, 0);
+	deviceContext->drawIndexedTriangleList(this->indexBuffer->getIndexSize(), 0, 0);
 	//graphEngine->getSwapChain()->present(true); // we do not present immediately. We draw all objects first, before displaying
 }
 
