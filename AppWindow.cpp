@@ -10,6 +10,7 @@
 #include "InputSystem.h"
 #include "MathUtils.h"
 #include "Matrix4x4.h"
+#include "SceneCameraManager.h"
 
 void AppWindow::onCreate()
 {
@@ -22,9 +23,16 @@ void AppWindow::onCreate()
 	m_swap_chain = GraphicsEngine::get()->createSwapChain();
 
 	RECT rc = getClientWindowRect();
-
+	UINT width = rc.right - rc.left;
+	UINT height = rc.bottom - rc.top;
 	std::cout << "hwnd: " << this->m_hwnd;
-	m_swap_chain->init(this->m_hwnd, rc.right - rc.left, rc.bottom - rc.top);
+	m_swap_chain->init(this->m_hwnd, width, height);
+
+	Camera* sceneCamera = new Camera("UnregisteredHyperCam2");
+	sceneCamera->setPosition(0.f, 0.f, 0.f);
+	sceneCamera->setRotation(0.f, 0.f, 0.f);
+	sceneCamera->setPerspectiveProjectionMatrix(1.57f, (float)width / (float)height, 0.1f, 100.f);
+	SceneCameraManager::getInstance()->setSceneCamera(sceneCamera);
 
 	void* shaderByteCode = nullptr;
 	size_t sizeShader = 0;
@@ -58,6 +66,7 @@ void AppWindow::onUpdate()
 	ticks += EngineTime::getDeltaTime() * 1.0f;
 
 	InputSystem::getInstance()->update();
+	SceneCameraManager::getInstance()->update();
 
 	GraphicsEngine::get()->getImmediateDeviceContext()->clearRenderTargetColor(m_swap_chain, 0.2f, 0.2f, 0.2f, 1);
 
@@ -87,6 +96,7 @@ void AppWindow::onDestroy()
 	m_pixel_shader->release();
 
 	InputSystem::destroy();
+	SceneCameraManager::destroy();
 	GraphicsEngine::get()->release();
 }
 

@@ -12,6 +12,10 @@ public:
 
 	void update(float deltaTime) override;
 	Matrix4x4 getViewMatrix();
+	Matrix4x4 getProjectionMatrix();
+
+	void setOrthographicProjectionMatrix(float width, float height, float near_plane, float far_plane);
+	void setPerspectiveProjectionMatrix(float field_of_view, float aspect, float near_plane, float far_plane);
 
 	void onKeyUp(int key) override;
 	void onKeyDown(int key) override;
@@ -26,5 +30,5 @@ public:
 private:
 	void updateViewMatrix();
 
-	bool mCameraControlsEnabled = false;
+	Matrix4x4 mProjectionMatrix;
 };

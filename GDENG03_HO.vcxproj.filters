@@ -126,6 +126,9 @@
     <ClCompile Include="Vector4D.cpp">
       <Filter>GameEngine\Graphics Engine\MathUtilities</Filter>
     </ClCompile>
+    <ClCompile Include="SceneCameraManager.cpp">
+      <Filter>GameEngine\Graphics Engine\Camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -193,6 +196,9 @@
     </ClInclude>
     <ClInclude Include="Vector4D.h">
       <Filter>GameEngine\Graphics Engine\MathUtilities</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneCameraManager.h">
+      <Filter>GameEngine\Graphics Engine\Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
