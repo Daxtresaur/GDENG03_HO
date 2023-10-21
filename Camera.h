@@ -3,6 +3,7 @@
 #include "InputListener.h"
 #include "InputSystem.h"
 #include "Matrix4x4.h"
+#include "EngineTime.h"
 
 class Camera : public AGameObject, public InputListener
 {
@@ -29,6 +30,8 @@ public:
 
 private:
 	void updateViewMatrix();
+
+	bool MouseRightClicked = false;
 
 	Matrix4x4 mProjectionMatrix;
 };

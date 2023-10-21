@@ -36,6 +36,8 @@ public:
 	IndexBuffer* createIndexBuffer();
 	ConstantBuffer* createConstantBuffer();
 
+	ID3D11Device* getDevice();
+
 private:
 	ID3D11Device* m_d3d_device;
 	D3D_FEATURE_LEVEL m_selected_feature_level;

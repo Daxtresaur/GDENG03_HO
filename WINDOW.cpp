@@ -10,13 +10,17 @@ const HMODULE moduleHandle = GetModuleHandle(nullptr);
 #include <iostream>
 #include <ostream>
 
+//extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
 Window::Window()
 {
 	m_is_running = false;
 }
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
-{
+{/*
+	if (ImGui_ImplWin32_WndProcHandler(hwnd, msg, wparam, lparam))
+		return true;*/
 	switch(msg)
 	{
 	case WM_CREATE:
@@ -129,6 +133,11 @@ void Window::setHWND(HWND hwnd)
 void Window::onDestroy()
 {
 	m_is_running = false;
+}
+
+HWND Window::getHWND()
+{
+	return m_hwnd;
 }
 
 Window::~Window()

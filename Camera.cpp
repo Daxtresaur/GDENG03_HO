@@ -12,16 +12,16 @@ Camera::~Camera()
 
 void Camera::update(float deltaTime)
 {
-	if (InputSystem::getInstance()->isKeyDown(VK_RBUTTON))
-	{
 		Vector3D newPosition = this->getLocalPosition();
 		float movementSpeed = 5.f;
 		float movementScalar;
 
+		
+
 		if (InputSystem::getInstance()->isKeyDown('W'))
 		{
 			movementScalar = deltaTime * movementSpeed * 1.f;
-			newPosition += (this->localMatrix.getZDirection() * movementScalar);
+			newPosition.z += movementScalar;
 			this->setPosition(newPosition);
 
 			updateViewMatrix();
@@ -30,7 +30,7 @@ void Camera::update(float deltaTime)
 		else if (InputSystem::getInstance()->isKeyDown('S'))
 		{
 			movementScalar = deltaTime * movementSpeed * -1.f;
-			newPosition += (this->localMatrix.getZDirection() * movementScalar);
+			newPosition.z += movementScalar;
 			this->setPosition(newPosition);
 
 			updateViewMatrix();
@@ -39,7 +39,7 @@ void Camera::update(float deltaTime)
 		else if (InputSystem::getInstance()->isKeyDown('D'))
 		{
 			movementScalar = deltaTime * movementSpeed * 1.f;
-			newPosition += (this->localMatrix.getXDirection() * movementScalar);
+			newPosition.x += movementScalar;
 			this->setPosition(newPosition);
 
 			updateViewMatrix();
@@ -48,18 +48,18 @@ void Camera::update(float deltaTime)
 		else if (InputSystem::getInstance()->isKeyDown('A'))
 		{
 			movementScalar = deltaTime * movementSpeed * -1.f;
-			newPosition += (this->localMatrix.getXDirection() * movementScalar);
+			newPosition.x += movementScalar;
 			this->setPosition(newPosition);
 
 			updateViewMatrix();
 		}
-	}
+	
 }
 
 Matrix4x4 Camera::getViewMatrix()
 {
 	Matrix4x4 viewMatrix = this->localMatrix;
-	viewMatrix.inverse();
+	//viewMatrix.inverse();
 	return viewMatrix;
 }
 
@@ -78,7 +78,7 @@ void Camera::setPerspectiveProjectionMatrix(float field_of_view, float aspect, f
 
 void Camera::onKeyUp(int key)
 {
-	switch (key) {
+	/*switch (key) {
 	case 'W':
 		std::cout << "W key has been released." << std::endl;
 		break;
@@ -97,12 +97,12 @@ void Camera::onKeyUp(int key)
 	case 'Z':
 		std::cout << "Z key has been released." << std::endl;
 		break;
-	}
+	}*/
 }
 
 void Camera::onKeyDown(int key)
 {
-	switch (key) {
+	/*switch (key) {
 	case 'W':
 		std::cout << "W key has been pressed." << std::endl;
 		break;
@@ -121,15 +121,19 @@ void Camera::onKeyDown(int key)
 	case 'Z':
 		std::cout << "Z key has been pressed." << std::endl;
 		break;
-	}
+	}*/
 }
 
 void Camera::onMouseMove(const Point deltaPos)
 {
-	Vector3D newRotation = this->getLocalRotation();
+	if (!MouseRightClicked)
+	{
+		return;
+	}
 
-	newRotation.y += (float)deltaPos.getX() * 0.01f;
-	newRotation.x += (float)deltaPos.getY() * 0.01f;
+	Vector3D newRotation = this->getLocalRotation();
+	newRotation.y -= (float)deltaPos.getX() * 0.1f * EngineTime::getDeltaTime();
+	newRotation.x -= (float)deltaPos.getY() * 0.1f * EngineTime::getDeltaTime();
 
 	this->setRotation(newRotation);
 
@@ -149,13 +153,13 @@ void Camera::onLeftMouseUp(const Point deltaPos)
 void Camera::onRightMouseDown(const Point deltaPos)
 {
 	std::cout << "Right mouse button pressed" << std::endl;
-
+	MouseRightClicked = true;
 }
 
 void Camera::onRightMouseUp(const Point deltaPos)
 {
 	std::cout << "Right mouse button released" << std::endl;
-
+	MouseRightClicked = false;
 }
 
 void Camera::draw(int width, int height, VertexShader* vertexShader, PixelShader* pixelShader)
@@ -172,6 +176,7 @@ void Camera::updateViewMatrix()
 	worldCamMatrix.rotate(1, localRotation.y);
 	worldCamMatrix.rotate(2, localRotation.z);
 	worldCamMatrix.translate(this->getLocalPosition());
-
+	worldCamMatrix.inverse();
 	this->localMatrix = worldCamMatrix;
+
 }

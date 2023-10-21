@@ -198,3 +198,8 @@ ConstantBuffer* GraphicsEngine::createConstantBuffer()
 {
 	return new ConstantBuffer();
 }
+
+ID3D11Device* GraphicsEngine::getDevice()
+{
+	return m_d3d_device;
+}

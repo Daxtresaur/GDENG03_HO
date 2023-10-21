@@ -12,6 +12,12 @@
 #include "Matrix4x4.h"
 #include "SceneCameraManager.h"
 
+/*
+#include "imgui.h"
+#include "imgui_impl_win32.h"
+#include "imgui_impl_dx11.h"
+*/
+
 void AppWindow::onCreate()
 {
 	GraphicsEngine::get()->init();
@@ -59,6 +65,19 @@ void AppWindow::onCreate()
 	graphEngine->compilePixelShader(L"PixelShader.hlsl", "psmain", &shaderByteCode, &sizeShader);
 	this->m_pixel_shader = graphEngine->createPixelShader(shaderByteCode, sizeShader);
 	graphEngine->releaseCompiledShader();
+/*
+	// Setup Dear ImGui context
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO();
+	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+	//io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+	//io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;         // IF using Docking Branch
+
+	// Setup Platform/Renderer backends
+	ImGui_ImplWin32_Init(Window::getHWND());
+	ImGui_ImplDX11_Init(GraphicsEngine::get()->getDevice(), GraphicsEngine::get()->getImmediateDeviceContext()->getDeviceContext());
+*/
 }
 
 void AppWindow::onUpdate()
@@ -68,6 +87,13 @@ void AppWindow::onUpdate()
 	InputSystem::getInstance()->update();
 	SceneCameraManager::getInstance()->update();
 
+//	// (Your code process and dispatch Win32 messages)
+//// Start the Dear ImGui frame
+//	ImGui_ImplDX11_NewFrame();
+//	ImGui_ImplWin32_NewFrame();
+//	ImGui::NewFrame();
+//	ImGui::ShowDemoWindow(); // Show demo window! :)
+//
 	GraphicsEngine::get()->getImmediateDeviceContext()->clearRenderTargetColor(m_swap_chain, 0.2f, 0.2f, 0.2f, 1);
 
 	RECT rc = getClientWindowRect();
@@ -80,6 +106,12 @@ void AppWindow::onUpdate()
 		cubeList[i]->update(EngineTime::getDeltaTime());
 		cubeList[i]->draw(width, height, m_vertex_shader, m_pixel_shader);
 	}
+
+	//// Rendering
+	//// (Your code clears your framebuffer, renders your other stuff etc.)
+	//ImGui::Render();
+	//ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+	//// (Your code calls swapchain's Present() function)
 
 	m_swap_chain->present(true);
 }
@@ -98,6 +130,10 @@ void AppWindow::onDestroy()
 	InputSystem::destroy();
 	SceneCameraManager::destroy();
 	GraphicsEngine::get()->release();
+
+	/*ImGui_ImplDX11_Shutdown();
+	ImGui_ImplWin32_Shutdown();
+	ImGui::DestroyContext();*/
 }
 
 void AppWindow::onKeyDown(int key)

@@ -1,6 +1,7 @@
 #include "Cube.h"
 #include "GraphicsEngine.h"
 #include "SwapChain.h"
+#include "SceneCameraManager.h"
 
 Cube::Cube(string name, void* shaderByteCode, size_t sizeShader) :AGameObject(name)
 {
@@ -109,7 +110,8 @@ void Cube::draw(int width, int height, VertexShader* vertexShader, PixelShader* 
 	cbData.worldMatrix = allMatrix;
 
 	cbData.viewMatrix.setIdentity();
-	cbData.projMatrix.setOrthoLH(width / 400.0f, height / 400.0f, -4.0f, 4.0f);
+	cbData.projMatrix.setPerspectiveFovLH(1.57f, ((float)width / height), 0.1f, 100.f);
+	cbData.viewMatrix *= SceneCameraManager::getInstance()->getSceneCameraViewMatrix();
 
 	// set shaders
 	deviceContext->setVertexShader(vertexShader);

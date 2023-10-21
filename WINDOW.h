@@ -2,6 +2,9 @@
 #include <Windows.h>
 #include "ENGINETIME.h"
 
+//#include "imgui.h"
+//#include "imgui_impl_win32.h"
+//#include "imgui_impl_dx11.h"
 
 class Window
 {
@@ -21,6 +24,8 @@ public:
 	virtual void onCreate() =0;
 	virtual void onUpdate() =0;
 	virtual void onDestroy();
+
+	HWND getHWND();
 
 	virtual ~Window();
 
