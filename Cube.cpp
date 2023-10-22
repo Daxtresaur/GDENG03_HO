@@ -9,41 +9,18 @@ Cube::Cube(string name, void* shaderByteCode, size_t sizeShader) :AGameObject(na
 	Vertex quadList[] = {
 		//X, Y, Z
 		// 
-		//// Rainbow Cube
-		////FRONT FACE
-		//{Vector3D(-0.5f,-0.5f,-0.5f),    Vector3D(1,0,0),  Vector3D(0.2f,0,0) },
-		//{Vector3D(-0.5f,0.5f,-0.5f),    Vector3D(1,1,0), Vector3D(0.2f,0.2f,0) },
-		//{Vector3D(0.5f,0.5f,-0.5f),   Vector3D(1,1,0),  Vector3D(0.2f,0.2f,0) },
-		//{Vector3D(0.5f,-0.5f,-0.5f),     Vector3D(1,0,0), Vector3D(0.2f,0,0) },
-		//
-		////BACK FACE
-		//{Vector3D(0.5f,-0.5f,0.5f),    Vector3D(0,1,0), Vector3D(0,0.2f,0) },
-		//{Vector3D(0.5f,0.5f,0.5f),    Vector3D(0,1,1), Vector3D(0,0.2f,0.2f) },
-		//{Vector3D(-0.5f,0.5f,0.5f),   Vector3D(0,1,1),  Vector3D(0,0.2f,0.2f) },
-		//{Vector3D(-0.5f,-0.5f,0.5f),     Vector3D(0,1,0), Vector3D(0,0.2f,0) },
+		// Rainbow Cube
+		//FRONT FACE
+		{Vector3D(-0.5f,-0.5f,-0.5f),    Vector3D(1,0,0),  Vector3D(0.2f,0,0) },
+		{Vector3D(-0.5f,0.5f,-0.5f),    Vector3D(1,1,0), Vector3D(0.2f,0.2f,0) },
+		{Vector3D(0.5f,0.5f,-0.5f),   Vector3D(1,1,0),  Vector3D(0.2f,0.2f,0) },
+		{Vector3D(0.5f,-0.5f,-0.5f),     Vector3D(1,0,0), Vector3D(0.2f,0,0) },
 		
-		//White Cube
-		{Vector3D(-0.5f,-0.5f,-0.5f),    Vector3D(1,1,1),  Vector3D(1,1,1) },
-		{Vector3D(-0.5f,0.5f,-0.5f),    Vector3D(1,1,1), Vector3D(1,1,1) },
-		{Vector3D(0.5f,0.5f,-0.5f),   Vector3D(1,1,1),  Vector3D(1,1,1) },
-		{Vector3D(0.5f,-0.5f,-0.5f),     Vector3D(1,1,1), Vector3D(1,1,1) },
-
-		{Vector3D(0.5f,-0.5f,0.5f),    Vector3D(1,1,1),  Vector3D(1,1,1) },
-		{Vector3D(0.5f,0.5f,0.5f),    Vector3D(1,1,1),  Vector3D(1,1,1)},
-		{Vector3D(-0.5f,0.5f,0.5f),   Vector3D(1,1,1),  Vector3D(1,1,1) },
-		{Vector3D(-0.5f,-0.5f,0.5f),     Vector3D(1,1,1),  Vector3D(1,1,1)},
-
-		//RB Cube
-	/*	{Vector3D(-0.5f,-0.5f,-0.5f),    Vector3D(0,0,1),  Vector3D(1,0,0) },
-		{Vector3D(-0.5f,0.5f,-0.5f),    Vector3D(0,0,1),  Vector3D(1,0,0) },
-		{Vector3D(0.5f,0.5f,-0.5f),   Vector3D(0,0,1),  Vector3D(1,0,0) },
-		{Vector3D(0.5f,-0.5f,-0.5f),     Vector3D(0,0,1),  Vector3D(1,0,0) },
-
-		{Vector3D(0.5f,-0.5f,0.5f),   Vector3D(0,0,1),  Vector3D(1,0,0) },
-		{Vector3D(0.5f,0.5f,0.5f),   Vector3D(0,0,1),  Vector3D(1,0,0)},
-		{Vector3D(-0.5f,0.5f,0.5f),  Vector3D(0,0,1),  Vector3D(1,0,0) },
-		{Vector3D(-0.5f,-0.5f,0.5f),     Vector3D(0,0,1),  Vector3D(1,0,0)},*/
-		
+		//BACK FACE
+		{Vector3D(0.5f,-0.5f,0.5f),    Vector3D(0,1,0), Vector3D(0,0.2f,0) },
+		{Vector3D(0.5f,0.5f,0.5f),    Vector3D(0,1,1), Vector3D(0,0.2f,0.2f) },
+		{Vector3D(-0.5f,0.5f,0.5f),   Vector3D(0,1,1),  Vector3D(0,0.2f,0.2f) },
+		{Vector3D(-0.5f,-0.5f,0.5f),     Vector3D(0,1,0), Vector3D(0,0.2f,0) },	
 	};
 
 	this->vertexBuffer = GraphicsEngine::get()->createVertexBuffer();
@@ -91,17 +68,7 @@ void Cube::update(float deltaTime)
 {
 	this->deltaTime = deltaTime;
 
-	////Case 3
-	//this->ticks += deltaTime;
-	//this->setScale(((sin(ticks)) + 1) / 2, ((sin(ticks)) + 1) / 2, ((sin(ticks)) + 1) / 2);
-	//this->setPosition(((sin(ticks)) + 1) / 2, ((sin(ticks)) + 1) / 2, ((sin(ticks)) + 1) / 2);
-
-	// Case5
-	//this->ticks += deltaTime;
-	//this->setScale(1, ((sin(ticks)) + 1) / 2,1);
-
-	//Case 4
-	/*if (this->speed <= 1.0f) {
+	if (this->speed <= 1.0f) {
 		this->ticks += deltaTime;
 
 		float rotSpeed = this->ticks * this->speed;
@@ -114,7 +81,7 @@ void Cube::update(float deltaTime)
 		float rotSpeed = this->ticks * this->speed;
 		this->setRotation(rotSpeed, rotSpeed, rotSpeed);
 		
-	}*/
+	}
 }
 
 void Cube::draw(int width, int height, VertexShader* vertexShader, PixelShader* pixelShader)
