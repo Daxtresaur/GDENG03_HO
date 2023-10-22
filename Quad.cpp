@@ -8,10 +8,10 @@ Quad::Quad(std::string name, void* shaderByteCode, size_t sizeShader) : AGameObj
 {
 	Vertex Vertex_list[] = {
 		// FRONT FACE
-		{ Vector3D(-0.5f, -0.5f, 0.f),    Vector3D(1,1,0),  Vector3D(1,1,0) },
-		{ Vector3D(-0.5f,  0.5f, 0.f),    Vector3D(1,1,0),  Vector3D(1,1,0) },
-		{ Vector3D(0.5f, -0.5f,  0.f),    Vector3D(1,1,0),  Vector3D(1,1,0) },
-		{ Vector3D(0.5f,  0.5f,  0.f),    Vector3D(1,0,0),  Vector3D(1,0,0) },
+		{ Vector3D(-0.5f, 0.f, -0.5f),    Vector3D(1,1,1),  Vector3D(1,1,1) },
+		{ Vector3D(-0.5f,  0.f, 0.5f),    Vector3D(1,1,1),  Vector3D(1,1,1) },
+		{ Vector3D(0.5f, 0.f,  -0.5f),    Vector3D(1,1,1),  Vector3D(1,1,1) },
+		{ Vector3D(0.5f,  0.f,  0.5f),    Vector3D(1,1,1),  Vector3D(1,1,1) },
 	};
 
 	m_vb = GraphicsEngine::get()->createVertexBuffer();
@@ -81,7 +81,7 @@ void Quad::draw(int width, int height, VertexShader* Vertex_shader, PixelShader*
 	GraphicsEngine::get()->getImmediateDeviceContext()->drawTriangleStrip(m_vb->getSizeVertexList(), 0);
 }
 
-void Quad::setAnimationSpeed(float speed)
+void Quad::setAnimSpeed(float speed)
 {
 	m_speed = speed;
 }

@@ -4,6 +4,7 @@
 #include <math.h>
 
 #include "Cube.h"
+#include "Quad.h"
 #include "Vector3D.h"
 #include "EngineTime.h"
 #include "GraphicsEngine.h"
@@ -47,17 +48,65 @@ void AppWindow::onCreate()
 	graphEngine->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shaderByteCode, &sizeShader);
 	this->m_vertex_shader = graphEngine->createVertexShader(shaderByteCode, sizeShader);
 
-	for (int i = 0; i < 10; i++) {
-		float x = MathUtils::randomFloat(-0.75, 0.75f);
-		float y = MathUtils::randomFloat(-0.75, 0.75f);
-		float z = MathUtils::randomFloat(-0.75, 0.75f);
+	// Testing
+	// Case 4
+	//for (int i = 0; i < 50; i++) {
+	//	float x = MathUtils::randomFloat(-0.5, 0.5f);
+	//	float y = MathUtils::randomFloat(-0.5, 0.5f);
+	//	float z = MathUtils::randomFloat(-0.5, 0.5f);
 
-		Cube* cubeObject = new Cube("Cube", shaderByteCode, sizeShader);
-		cubeObject->setAnimSpeed(MathUtils::randomFloat(-3.75f, 3.75f));
-		cubeObject->setPosition(Vector3D(x, y, z));
-		cubeObject->setScale(Vector3D(0.25, 0.25, 0.25));
-		this->cubeList.push_back(cubeObject);
-	}
+	//	Cube* cubeObject = new Cube("Cube", shaderByteCode, sizeShader);
+	//	cubeObject->setAnimSpeed(MathUtils::randomFloat(-3.75f, 3.75f));
+	//	cubeObject->setPosition(Vector3D(x, y, z));
+	//	cubeObject->setScale(Vector3D(0.25, 0.25, 0.25));
+	//	this->objectList.push_back(cubeObject);
+	//}
+
+	/*Quad* quadObject = new Quad("Plane", shaderByteCode, sizeShader);
+	quadObject->setAnimSpeed(MathUtils::randomFloat(-3.75f, 3.75f));
+	quadObject->setPosition(Vector3D(0, -1, 0));
+	quadObject->setScale(Vector3D(5, 5, 5));
+	this->objectList.push_back(quadObject);*/
+
+	//White Cube
+	/*Cube* cubeObject = new Cube("RainbowCube", shaderByteCode, sizeShader);
+	cubeObject->setAnimSpeed(MathUtils::randomFloat(-3.75f, 3.75f));
+	cubeObject->setPosition(Vector3D(0, 0, 0));
+	cubeObject->setScale(Vector3D(0.25, 0.25, 0.25));
+	this->objectList.push_back(cubeObject);*/
+
+	//Blue-Red Cube
+	/*Cube* cubeObject = new Cube("Cube", shaderByteCode, sizeShader);
+	cubeObject->setAnimSpeed(1);
+	cubeObject->setPosition(Vector3D(0, -1, 4));
+	cubeObject->setScale(Vector3D(0.25, 0.25, 0.25));
+	this->objectList.push_back(cubeObject);*/
+
+	// Case 6
+	
+	Cube* cubeObject = new Cube("Cube1", shaderByteCode, sizeShader);
+	cubeObject->setAnimSpeed(MathUtils::randomFloat(-3.75f, 3.75f));
+	cubeObject->setPosition(Vector3D(-1.5, 1.0, -3.0));
+	cubeObject->setScale(Vector3D(0.75, 0.75, 0.75));
+	this->objectList.push_back(cubeObject);
+
+	Cube* cubeObject2 = new Cube("Cube2", shaderByteCode, sizeShader);
+	cubeObject2->setAnimSpeed(MathUtils::randomFloat(-3.75f, 3.75f));
+	cubeObject2->setPosition(Vector3D(0.0, 1.0, 0.0));
+	cubeObject2->setScale(Vector3D(0.75, 0.75, 0.75));
+	this->objectList.push_back(cubeObject2);
+
+	Cube* cubeObject3 = new Cube("Cube3", shaderByteCode, sizeShader);
+	cubeObject3->setAnimSpeed(MathUtils::randomFloat(-3.75f, 3.75f));
+	cubeObject3->setPosition(Vector3D(2.6, 1.0, 2.0));
+	cubeObject3->setScale(Vector3D(0.75, 0.75, 0.75));
+	this->objectList.push_back(cubeObject3);
+
+	Quad* quadObject = new Quad("Plane", shaderByteCode, sizeShader);
+	quadObject->setAnimSpeed(MathUtils::randomFloat(-3.75f, 3.75f));
+	quadObject->setPosition(Vector3D(0, -1, 0));
+	quadObject->setScale(Vector3D(10, 10, 10));
+	this->objectList.push_back(quadObject);
 
 	graphEngine->releaseCompiledShader(); // this must be called after compilation of each shader
 
@@ -102,9 +151,9 @@ void AppWindow::onUpdate()
 
 	GraphicsEngine::get()->getImmediateDeviceContext()->setViewportSize(width, height);
 
-	for (int i = 0; i < cubeList.size(); i++) {
-		cubeList[i]->update(EngineTime::getDeltaTime());
-		cubeList[i]->draw(width, height, m_vertex_shader, m_pixel_shader);
+	for (int i = 0; i < objectList.size(); i++) {
+		objectList[i]->update(EngineTime::getDeltaTime());
+		objectList[i]->draw(width, height, m_vertex_shader, m_pixel_shader);
 	}
 
 	//// Rendering

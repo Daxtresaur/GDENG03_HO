@@ -129,7 +129,9 @@
     <ClCompile Include="SceneCameraManager.cpp">
       <Filter>GameEngine\Graphics Engine\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="Quad.cpp" />
+    <ClCompile Include="Quad.cpp">
+      <Filter>GameEngine\Graphics Engine\GameObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -149,9 +151,6 @@
     </ClInclude>
     <ClInclude Include="VertexBuffer.h">
       <Filter>GameEngine\Graphics Engine\Buffers\VertexBuffer</Filter>
-    </ClInclude>
-    <ClInclude Include="AGameObject.h">
-      <Filter>GameEngine\Graphics Engine\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="Point.h">
       <Filter>GameEngine\Graphics Engine\GameObjects</Filter>
@@ -201,7 +200,12 @@
     <ClInclude Include="SceneCameraManager.h">
       <Filter>GameEngine\Graphics Engine\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="Quad.h" />
+    <ClInclude Include="AGameObject.h">
+      <Filter>GameEngine\Graphics Engine\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Quad.h">
+      <Filter>GameEngine\Graphics Engine\GameObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="VertexShader.hlsl">

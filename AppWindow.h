@@ -30,7 +30,7 @@ public:
 	virtual void onRightMouseDown(const Point deltaPos);
 	virtual void onRightMouseUp(const Point deltaPos);
 private:
-	std::vector<Cube*> cubeList;
+	std::vector<AGameObject*> objectList;
 
 	float ticks = 0.0f;
 

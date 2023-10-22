@@ -13,7 +13,7 @@ public:
 
 	void update(float deltaTime) override;
 	void draw(int width, int height, VertexShader* vertex_shader, PixelShader* pixel_shader) override;
-	void setAnimationSpeed(float speed);
+	void setAnimSpeed(float speed);
 
 private:
 	VertexBuffer* m_vb;
