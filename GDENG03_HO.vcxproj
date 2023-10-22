@@ -150,6 +150,7 @@
     <ClCompile Include="PixelShader.cpp" />
     <ClCompile Include="AGameObject.cpp" />
     <ClCompile Include="Point.cpp" />
+    <ClCompile Include="Quad.cpp" />
     <ClCompile Include="SceneCameraManager.cpp" />
     <ClCompile Include="SwapChain.cpp" />
     <ClCompile Include="Utilities.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="PixelShader.h" />
     <ClInclude Include="AGameObject.h" />
     <ClInclude Include="Point.h" />
+    <ClInclude Include="Quad.h" />
     <ClInclude Include="SceneCameraManager.h" />
     <ClInclude Include="SwapChain.h" />
     <ClInclude Include="Utilities.h" />

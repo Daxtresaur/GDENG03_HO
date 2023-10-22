@@ -129,6 +129,7 @@
     <ClCompile Include="SceneCameraManager.cpp">
       <Filter>GameEngine\Graphics Engine\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="Quad.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -200,6 +201,7 @@
     <ClInclude Include="SceneCameraManager.h">
       <Filter>GameEngine\Graphics Engine\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="Quad.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="VertexShader.hlsl">
