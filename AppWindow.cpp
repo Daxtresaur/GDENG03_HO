@@ -155,10 +155,10 @@ void AppWindow::onUpdate()
 void AppWindow::onDestroy()
 {
 	Window::onDestroy();
-	m_swap_chain->release();
+	m_swap_chain->release();/*
 	m_vertex_buffer->release();
 	m_index_buffer->release();
-	m_constant_buffer->release();
+	m_constant_buffer->release();*/
 
 	m_vertex_shader->release();
 	m_pixel_shader->release();
