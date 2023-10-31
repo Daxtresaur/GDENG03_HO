@@ -64,6 +64,9 @@
     <Filter Include="GameEngine\UI">
       <UniqueIdentifier>{f9da5880-ef0e-4468-8896-8c9b211da7c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\UI\Screens">
+      <UniqueIdentifier>{58a17f87-6b96-44e3-9c7b-16919a1de231}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MAIN.cpp">
@@ -164,6 +167,21 @@
     </ClCompile>
     <ClCompile Include="imgui\imgui_widgets.cpp">
       <Filter>GameEngine\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineProfiler.cpp">
+      <Filter>GameEngine\UI\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectManager.cpp">
+      <Filter>GameEngine\UI\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="InspectorWindow.cpp">
+      <Filter>GameEngine\UI\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneOutliner.cpp">
+      <Filter>GameEngine\UI\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolBar.cpp">
+      <Filter>GameEngine\UI\Screens</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -271,6 +289,21 @@
     </ClInclude>
     <ClInclude Include="imgui\imstb_truetype.h">
       <Filter>GameEngine\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineProfiler.h">
+      <Filter>GameEngine\UI\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectManager.h">
+      <Filter>GameEngine\UI\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="InspectorWindow.h">
+      <Filter>GameEngine\UI\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneOutliner.h">
+      <Filter>GameEngine\UI\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolBar.h">
+      <Filter>GameEngine\UI\Screens</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

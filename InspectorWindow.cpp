@@ -39,7 +39,7 @@ void InspectorWindow::drawUI()
 		float scale[] = { sca.x, sca.y, sca.z };
 
 		ImGui::DragFloat3("Position", position, 0.05f);
-		ImGui::DragFloat3("Rotation", rotation, 0.05f);
+		ImGui::DragFloat3("Rotation", rotation, 0.5f);
 		ImGui::DragFloat3("Scale", scale, 0.05f);
 
 		selectedObject->setPosition(position[0], position[1], position[2]);
