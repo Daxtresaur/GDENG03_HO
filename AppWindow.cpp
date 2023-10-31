@@ -14,11 +14,6 @@
 #include "SceneCameraManager.h"
 
 
-#include "imgui.h"
-#include "imgui_impl_win32.h"
-#include "imgui_impl_dx11.h"
-
-
 void AppWindow::onCreate()
 {
 	GraphicsEngine::get()->init();
@@ -67,17 +62,10 @@ void AppWindow::onCreate()
 	this->m_pixel_shader = graphEngine->createPixelShader(shaderByteCode, sizeShader);
 	graphEngine->releaseCompiledShader();
 
-	// Setup Dear ImGui context
-	IMGUI_CHECKVERSION();
-	ImGui::CreateContext();
-	ImGuiIO& io = ImGui::GetIO();
-	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
-	//io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
-	//io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;         // IF using Docking Branch
 
-	// Setup Platform/Renderer backends
-	ImGui_ImplWin32_Init(Window::getHWND());
-	ImGui_ImplDX11_Init(GraphicsEngine::get()->getDevice(), GraphicsEngine::get()->getImmediateDeviceContext()->getDeviceContext());
+	UIManager::initialize(Window::getHWND());
+	GameObjectManager::initialize();
+
 
 }
 
@@ -90,44 +78,44 @@ void AppWindow::onUpdate()
 
 	// (Your code process and dispatch Win32 messages)
 	// Start the Dear ImGui frame
-	ImGui_ImplDX11_NewFrame();
-	ImGui_ImplWin32_NewFrame();
-	ImGui::NewFrame();
+	//ImGui_ImplDX11_NewFrame();
+	//ImGui_ImplWin32_NewFrame();
+	//ImGui::NewFrame();
 
-	//ImGui Implementation
-	ImGui::Begin("Scene Settings",nullptr, ImGuiWindowFlags_NoResize);
+	////ImGui Implementation
+	//ImGui::Begin("Scene Settings",nullptr, ImGuiWindowFlags_NoResize);
 
-	static bool showDemo = false;
+	//static bool showDemo = false;
 
-	ImGui::Text("Below our settings for configuring the Scene");
-	ImGui::Checkbox("Show Demo Window", &showDemo);
+	//ImGui::Text("Below our settings for configuring the Scene");
+	//ImGui::Checkbox("Show Demo Window", &showDemo);
 
-	if (showDemo)
-	{
-		ImGui::ShowDemoWindow(); // Show demo window! :)
-	}
+	//if (showDemo)
+	//{
+	//	ImGui::ShowDemoWindow(); // Show demo window! :)
+	//}
 
-	static float colour[4] = {0,0,0,1};
-	static ImGuiColorEditFlags colourFlags = ImGuiColorEditFlags_NoAlpha;
+	//static float colour[4] = {0,0,0,1};
+	//static ImGuiColorEditFlags colourFlags = ImGuiColorEditFlags_NoAlpha;
 
-	ImGui::ColorEdit4("Colour", colour, colourFlags);
+	//ImGui::ColorEdit4("Colour", colour, colourFlags);
 
-	static bool playAnim = true;
-	std::string switchAnim = "Play Animation";
+	//static bool playAnim = true;
+	//std::string switchAnim = "Play Animation";
 
-	if (!playAnim) 
-	{
-		switchAnim = "Resume Animation";
-	}
+	//if (!playAnim) 
+	//{
+	//	switchAnim = "Resume Animation";
+	//}
 
-	if (ImGui::Button(switchAnim.c_str()))
-	{
-		playAnim = !playAnim;
-	}
+	//if (ImGui::Button(switchAnim.c_str()))
+	//{
+	//	playAnim = !playAnim;
+	//}
 
-	ImGui::End();
+	//ImGui::End();
 
-	GraphicsEngine::get()->getImmediateDeviceContext()->clearRenderTargetColor(m_swap_chain, colour[0], colour[1], colour[2], colour[3]);
+	GraphicsEngine::get()->getImmediateDeviceContext()->clearRenderTargetColor(m_swap_chain, 0, 0.3f, 0.4f, 1);
 
 	RECT rc = getClientWindowRect();
 	int width = rc.right - rc.left;
@@ -135,19 +123,24 @@ void AppWindow::onUpdate()
 
 	GraphicsEngine::get()->getImmediateDeviceContext()->setViewportSize(width, height);
 
-	for (int i = 0; i < objectList.size(); i++) {
+	/*for (int i = 0; i < objectList.size(); i++) {
 		if (playAnim) 
 		{
 			objectList[i]->update(EngineTime::getDeltaTime());
 		}
 		objectList[i]->draw(width, height, m_vertex_shader, m_pixel_shader);
-	}
+	}*/
 
-	// END imgui
-	// (Your code clears your framebuffer, renders your other stuff etc.)
-	ImGui::Render();
-	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
-	// (Your code calls swapchain's Present() function)
+	//// END imgui
+	//// (Your code clears your framebuffer, renders your other stuff etc.)
+	//ImGui::Render();
+	//ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+	//// (Your code calls swapchain's Present() function)
+
+	GameObjectManager::getInstance()->updateAll();
+	GameObjectManager::getInstance()->renderAll(width,height,m_vertex_shader,m_pixel_shader);
+
+	UIManager::getInstance()->drawAllUI();
 
 	m_swap_chain->present(true);
 }
@@ -167,9 +160,9 @@ void AppWindow::onDestroy()
 	SceneCameraManager::destroy();
 	GraphicsEngine::get()->release();
 
-	ImGui_ImplDX11_Shutdown();
+	/*ImGui_ImplDX11_Shutdown();
 	ImGui_ImplWin32_Shutdown();
-	ImGui::DestroyContext();
+	ImGui::DestroyContext();*/
 }
 
 void AppWindow::onKeyDown(int key)

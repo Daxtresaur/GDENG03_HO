@@ -8,6 +8,9 @@
 #include "VertexBuffer.h"
 #include "VertexShader.h"
 
+#include "GameObjectManager.h"
+#include "UIManager.h"
+
 class AppWindow : public Window, public InputListener
 {
 public:

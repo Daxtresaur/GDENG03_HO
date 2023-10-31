@@ -28,6 +28,8 @@ public:
 
 	void draw(int width, int height, VertexShader* vertexShader, PixelShader* pixelShader) override;
 
+	void release() override;
+
 private:
 	void updateViewMatrix();
 

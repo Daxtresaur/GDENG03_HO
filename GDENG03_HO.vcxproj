@@ -142,7 +142,9 @@
     <ClCompile Include="ConstantBuffer.cpp" />
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="DeviceContext.cpp" />
+    <ClCompile Include="EngineProfiler.cpp" />
     <ClCompile Include="EngineTime.cpp" />
+    <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="GraphicsEngine.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />
     <ClCompile Include="imgui\imgui_demo.cpp" />
@@ -153,6 +155,7 @@
     <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="IndexBuffer.cpp" />
     <ClCompile Include="InputSystem.cpp" />
+    <ClCompile Include="InspectorWindow.cpp" />
     <ClCompile Include="MAIN.cpp" />
     <ClCompile Include="MathUtils.cpp" />
     <ClCompile Include="Matrix4x4.cpp" />
@@ -161,7 +164,9 @@
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Quad.cpp" />
     <ClCompile Include="SceneCameraManager.cpp" />
+    <ClCompile Include="SceneOutliner.cpp" />
     <ClCompile Include="SwapChain.cpp" />
+    <ClCompile Include="ToolBar.cpp" />
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="Utilities.cpp" />
     <ClCompile Include="Vector3D.cpp" />
@@ -177,7 +182,9 @@
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="DeviceContext.h" />
+    <ClInclude Include="EngineProfiler.h" />
     <ClInclude Include="EngineTime.h" />
+    <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="GraphicsEngine.h" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui.h" />
@@ -190,6 +197,7 @@
     <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="InputListener.h" />
     <ClInclude Include="InputSystem.h" />
+    <ClInclude Include="InspectorWindow.h" />
     <ClInclude Include="MathUtils.h" />
     <ClInclude Include="Matrix4x4.h" />
     <ClInclude Include="PixelShader.h" />
@@ -197,7 +205,9 @@
     <ClInclude Include="Point.h" />
     <ClInclude Include="Quad.h" />
     <ClInclude Include="SceneCameraManager.h" />
+    <ClInclude Include="SceneOutliner.h" />
     <ClInclude Include="SwapChain.h" />
+    <ClInclude Include="ToolBar.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="UINames.h" />
     <ClInclude Include="Utilities.h" />

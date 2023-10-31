@@ -52,6 +52,7 @@ Vector3D AGameObject::getLocalRotation()
 	return this->localRotation;
 }
 
+
 Vector3D AGameObject::getLocalScale()
 {
 	return this->localScale;
@@ -60,4 +61,14 @@ Vector3D AGameObject::getLocalScale()
 string AGameObject::getName()
 {
 	return this->name;
+}
+
+bool AGameObject::getActive()
+{
+	return IsActive;
+}
+
+void AGameObject::setActive(bool setter)
+{
+	IsActive = setter;
 }

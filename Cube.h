@@ -14,6 +14,8 @@ public:
 	void draw(int width, int height, VertexShader* vertexShader, PixelShader* pixelShader) override;
 	void setAnimSpeed(float speed);
 
+	void release() override;
+
 private:
 	VertexBuffer* vertexBuffer;
 	IndexBuffer* indexBuffer;

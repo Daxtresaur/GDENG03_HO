@@ -30,7 +30,12 @@ public:
 	void setRotation(Vector3D rot);
 	Vector3D getLocalRotation();
 
+	virtual void release()=0;
+
 	string getName();
+
+	bool getActive();
+	void setActive(bool setter);
 
 	struct Vertex {
 		Vector3D position;
@@ -47,6 +52,7 @@ public:
 	};
 
 protected:
+	bool IsActive = true;
 	string name;
 	Vector3D localPosition;
 	Vector3D localScale;

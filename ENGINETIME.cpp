@@ -7,7 +7,7 @@ void EngineTime::initialize()
 	sharedInstance = new EngineTime();
 }
 
-double EngineTime::getDeltaTime()
+float EngineTime::getDeltaTime()
 {
 	return sharedInstance->deltaTime;
 }

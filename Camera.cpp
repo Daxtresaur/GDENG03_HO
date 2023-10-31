@@ -3,6 +3,8 @@
 Camera::Camera(std::string name) : AGameObject::AGameObject(name)
 {
 	InputSystem::getInstance()->addListener(this);
+	this->setPosition(0, 0, -5);
+	this->updateViewMatrix();
 }
 
 Camera::~Camera()
@@ -163,6 +165,10 @@ void Camera::onRightMouseUp(const Point deltaPos)
 }
 
 void Camera::draw(int width, int height, VertexShader* vertexShader, PixelShader* pixelShader)
+{
+}
+
+void Camera::release()
 {
 }
 

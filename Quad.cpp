@@ -85,3 +85,7 @@ void Quad::setAnimSpeed(float speed)
 {
 	m_speed = speed;
 }
+
+void Quad::release()
+{
+}
