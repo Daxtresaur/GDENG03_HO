@@ -3,6 +3,7 @@
 
 Matrix4x4::Matrix4x4()
 {
+	this->setIdentity();
 }
 
 Matrix4x4::~Matrix4x4()
@@ -221,6 +222,11 @@ Vector3D Matrix4x4::getZDirection()
 Vector3D Matrix4x4::getXDirection()
 {
 	return Vector3D(this->matrix[0][0], this->matrix[0][1], this->matrix[0][2]);
+}
+
+Vector3D Matrix4x4::getYDirection()
+{
+	return Vector3D(this->matrix[1][0], this->matrix[1][1], this->matrix[1][2]);
 }
 
 Vector3D Matrix4x4::getTranslation()

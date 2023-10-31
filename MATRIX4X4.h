@@ -30,6 +30,7 @@ public:
 
 	Vector3D getZDirection();
 	Vector3D getXDirection();
+	Vector3D getYDirection();
 	Vector3D getTranslation();
 
 	void setMatrix(const Matrix4x4& matrix);

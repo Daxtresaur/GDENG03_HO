@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include "UINames.h"
+#include "MathUtils.h"
 
 #include "AUIScreen.h"
 #include "GraphicsEngine.h"
